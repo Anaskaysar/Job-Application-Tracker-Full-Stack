@@ -2,6 +2,11 @@ from rest_framework import viewsets, permissions
 from .models import Application, ApplicationFile
 from .serializers import ApplicationSerializer, ApplicationFileSerializer
 
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from allauth.socialaccount.providers.oauth2.client import OAuth2Client
+from dj_rest_auth.registration.views import SocialLoginView
+
+
 class ApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = ApplicationSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -21,3 +26,8 @@ class ApplicationFileViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         # Only return files belonging to the current user's applications
         return ApplicationFile.objects.filter(application__user=self.request.user)
+
+class GoogleLogin(SocialLoginView):
+    adapter_class = GoogleOAuth2Adapter
+    callback_url = "http://localhost:5173"
+    client_class = OAuth2Client

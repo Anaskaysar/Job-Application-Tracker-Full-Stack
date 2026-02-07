@@ -1,7 +1,9 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import { AlertCircle, Lock, Mail, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
+import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
 
 const SignupPage = () => {
@@ -10,7 +12,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [localError, setLocalError] = useState("");
-  const { register, error, loading } = useAuth();
+  const { register, googleLogin, error, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,14 +23,24 @@ const SignupPage = () => {
       return;
     }
     try {
-      await register({ name, email, password });
-      navigate("/login");
+      // Backend expects username, email, password. Using email as username for now.
+      // dj-rest-auth expects password1 and password2 by default
+      await register({ username: email, email, password1: password, password2: password, name });
+      navigate("/dashboard");
     } catch (err) {}
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Google Sign In clicked");
-  };
+  const handleGoogleSignIn = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        await googleLogin(tokenResponse.access_token);
+        navigate("/dashboard");
+      } catch (err) {
+        console.error("Google Auth failed", err);
+      }
+    },
+    onError: (error) => console.log("Login Failed:", error),
+  });
 
   return (
     <AuthLayout

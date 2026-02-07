@@ -1,0 +1,27 @@
+# Environments
+.env
+.env.local
+.env.*.local
+
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,7 +1,7 @@
 //set a base url so that we dont have to type it every time
 import axios from "axios";
 
-const baseURL = "http://127.0.0.1:8000/";
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:8000/";
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -14,9 +14,14 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('access_token');
-        if (token) {
-            // Match the Django format: "Bearer <token>"
-            config.headers.Authorization = `Bearer ${token}`;
+        const authEndpoints = ['/api/auth/login/', '/api/auth/registration/', '/api/auth/google/'];
+        // Using startsWith in case of full URLs or params
+        const isAuthRequest = authEndpoints.some(endpoint => config.url.startsWith(endpoint) || config.url.includes(endpoint));
+
+        if (token && !isAuthRequest) {
+            // Smartly detect if it's a JWT (long) or a standard Token (short)
+            const prefix = token.length > 50 ? "Bearer" : "Token";
+            config.headers.Authorization = `${prefix} ${token}`;
         }
         return config;
     },

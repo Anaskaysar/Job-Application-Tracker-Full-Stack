@@ -8,6 +8,7 @@ import {
 import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
 import { useAuth } from "./context/AuthContext";
+import DashBoard from "./pages/Dashboard/DashBoard";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -39,6 +40,14 @@ const AppContent = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <DashBoard />
+            </PrivateRoute>
+          }
+        />
         {/* Fallback */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

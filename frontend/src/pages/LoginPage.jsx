@@ -1,26 +1,36 @@
+import { useGoogleLogin } from "@react-oauth/google";
 import { AlertCircle, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
+import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { login, error, loading } = useAuth();
+  const { login, googleLogin, error, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await login(email, password);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {}
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Google Sign In clicked");
-  };
+  const handleGoogleSignIn = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        await googleLogin(tokenResponse.access_token);
+        navigate("/dashboard");
+      } catch (err) {
+        console.error("Google Auth failed", err);
+      }
+    },
+    onError: (error) => console.log("Login Failed:", error),
+  });
 
   return (
     <AuthLayout
