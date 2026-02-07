@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import api from "../api/axios.js";
+import api from "../api/axios";
 
 const AuthContext = createContext();
 
@@ -41,6 +41,20 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
+    const register = async (userData) => {
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await api.post("/api/auth/register/", userData);
+            setLoading(false);
+            return response.data;
+        } catch (error) {
+            setError(error.response?.data || "Registration failed");
+            setLoading(false);
+            throw error;
+        }
+    };
+
     const logout = () => {
         setUser(null);
         localStorage.removeItem("access_token");
@@ -48,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, error, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, error, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );
