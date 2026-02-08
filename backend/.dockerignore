@@ -1,0 +1,13 @@
+venv
+*.pyc
+__pycache__
+db.sqlite3
+.env
+.git
+.gitignore
+Dockerfile
+.dockerignore
+node_modules
+dist
+requirements.txt
+# Add others as needed

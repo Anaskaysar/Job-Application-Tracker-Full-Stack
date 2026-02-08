@@ -26,7 +26,7 @@ const PrivateRoute = ({ children }) => {
 const AppContent = () => {
   const { loading } = useAuth();
   const location = useLocation();
-  const hideNavbarPaths = ["/login", "/signup"];
+  const hideNavbarPaths = ["/login", "/signup", "/dashboard", "/demo"];
   const shouldHideNavbar = hideNavbarPaths.includes(location.pathname);
 
   if (loading) {
@@ -48,6 +48,7 @@ const AppContent = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/demo" element={<DashBoard isDemo={true} />} />
         {/* Fallback */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

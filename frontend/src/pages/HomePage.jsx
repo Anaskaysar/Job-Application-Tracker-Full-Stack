@@ -13,7 +13,7 @@ const HomePage = () => {
   };
 
   const handleTryDemo = () => {
-    navigate("/signup");
+    navigate("/demo");
   };
 
   return (
