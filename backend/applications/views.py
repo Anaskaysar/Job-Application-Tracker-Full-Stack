@@ -1,6 +1,6 @@
 from rest_framework import viewsets, permissions
-from .models import Application, ApplicationFile
-from .serializers import ApplicationSerializer, ApplicationFileSerializer
+from .models import Application, ApplicationFile, Review
+from .serializers import ApplicationSerializer, ApplicationFileSerializer, ReviewSerializer
 
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
@@ -31,3 +31,19 @@ class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
     callback_url = "http://localhost:5173"
     client_class = OAuth2Client
+
+class ReviewViewSet(viewsets.ModelViewSet):
+    serializer_class = ReviewSerializer
+    
+    def get_permissions(self):
+        if self.action == 'list':
+            return [permissions.AllowAny()]
+        return [permissions.IsAuthenticated()]
+
+    def get_queryset(self):
+        if self.action == 'list':
+            return Review.objects.filter(is_public=True).order_by('-created_at')
+        return Review.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
