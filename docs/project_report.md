@@ -9,17 +9,17 @@
 
 ## Executive Summary
 
-I built the Job Application Tracker as a full-stack web application to help job seekers like myself organize and manage job applications efficiently. The system provides secure user authentication, comprehensive job tracking capabilities, file management for resumes and cover letters, and a modern, responsive user interface.
+The Job Application Tracker is a comprehensive **Full-Stack Cross-Platform Solution** designed to help job seekers organize and manage their job applications efficiently. The system consists of a robust Django backend, a modern React web frontend, and a native mobile application built with React Native. It provides secure user authentication, real-time synchronization across devices, file management, and insightful analytics.
 
-### What I've Accomplished
-- ✅ Implemented secure JWT-based authentication with Google OAuth integration
-- ✅ Built a RESTful API with Django REST Framework
-- ✅ Created a modern React frontend with Tailwind CSS v4
-- ✅ Ensured user-specific data isolation and security
-- ✅ Developed file upload and management system
-- ✅ Designed responsive dashboard with multiple view modes
-- ✅ Deployed Backend to AWS EC2 with Gunicorn and Nginx
-- ✅ Deployed Frontend to Vercel with custom domain mapping
+### Key Achievements
+
+- ✅ **Cross-Platform**: Web (React) and Mobile (React Native) applications
+- ✅ **Secure Auth**: JWT-based authentication with Google OAuth integration
+- ✅ **Cloud Native**: Backend on AWS EC2, Frontend on Vercel
+- ✅ **User Experience**: Seamless auto-login and optional email verification flows
+- ✅ **Data Integrity**: PostgreSQL production database with robust API
+- ✅ **Modern UI**: Tailwind CSS v4 (Web) and Native Styling (Mobile)
+- ✅ **File System**: Secure multi-file upload management
 
 ---
 
@@ -102,40 +102,41 @@ I designed this for:
 
 ```mermaid
 graph TB
-    subgraph "Frontend Layer"
-        A[React Application<br/>Vite + Tailwind CSS v4]
-        B[React Router<br/>Client-side Navigation]
-        C[Axios Client<br/>API Communication]
-        D[Auth Context<br/>State Management]
+    subgraph "Client Layer"
+        A[Web Application<br/>React + Tailwind v4<br/>(Hosted on Vercel)]
+        B[Mobile Application<br/>React Native<br/>(iOS & Android)]
     end
-    
-    subgraph "Backend Layer"
-        E[Django REST Framework<br/>API Server]
-        F[SimpleJWT<br/>Authentication]
-        G[Django Allauth<br/>Social Auth]
-        H[CORS Middleware<br/>Cross-Origin Requests]
+
+    subgraph "API Gateway & Security"
+        C[Nginx<br/>Reverse Proxy]
+        D[Gunicorn<br/>WSGI Server]
+        E[SSL/TLS<br/>Encryption]
     end
-    
-    subgraph "Data Layer"
-        I[SQLite Database<br/>Development]
-        J[PostgreSQL<br/>Production]
-        K[File Storage<br/>Application Files]
+
+    subgraph "Backend Layer (AWS EC2)"
+        F[Django REST Framework<br/>API Logic]
+        G[Authentication System<br/>SimpleJWT + Allauth]
+        H[Business Logic<br/>Apps & Views]
     end
-    
-    A --> C
-    B --> A
-    D --> A
-    C --> H
-    H --> E
-    E --> F
-    E --> G
-    E --> I
-    E --> J
-    E --> K
-    
+
+    subgraph "Data & Storage"
+        I[PostgreSQL<br/>Production DB]
+        J[File System<br/>Resume/Cover Letter Storage]
+    end
+
+    A <-->|HTTPS/JSON| C
+    B <-->|HTTPS/JSON| C
+    C <--> D
+    D <--> F
+    F --> G
+    F --> H
+    H --> I
+    H --> J
+
     style A fill:#61dafb,stroke:#333,stroke-width:2px
-    style E fill:#092e20,stroke:#333,stroke-width:2px,color:#fff
-    style I fill:#003b57,stroke:#333,stroke-width:2px,color:#fff
+    style B fill:#61dafb,stroke:#333,stroke-width:2px
+    style F fill:#092e20,stroke:#333,stroke-width:2px,color:#fff
+    style I fill:#336791,stroke:#333,stroke-width:2px,color:#fff
 ```
 
 ### Technology Stack I Chose
@@ -469,7 +470,71 @@ export default api;
 
 ---
 
-## 6. UI/UX Design
+## 6. Mobile Application Development
+
+### 6.1 Technology Stack
+
+I extended the platform to mobile devices using **React Native** and **Expo**, sharing the same backend API as the web version.
+
+#### Core Mobile Tech
+
+```json
+{
+  "dependencies": {
+    "react-native": "0.76.6",
+    "expo": "~52.0.25",
+    "expo-router": "~4.0.16",
+    "axios": "^1.7.9",
+    "lucide-react-native": "^0.474.0",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-gesture-handler": "~2.20.2",
+    "expo-linear-gradient": "~14.0.2"
+  }
+}
+```
+
+### 6.2 Key Features
+
+#### 📱 Native Experience
+- **Navigation**: Stack and Tab navigation using `expo-router`
+- **Gestures**: Smooth transitions and touch interactions
+- **Safe Area**: Optimized for iPhone Dynamic Island and notches
+- **Status Bar**: Adaptive styling for dark/light modes
+
+#### 🔐 Mobile Authentication
+- **Secure Storage**: JWT tokens stored in `AsyncStorage`
+- **Auto-Login**: Token validation on app launch
+- **Profile Modal**: Integrated user management within the app
+
+#### 📊 Dashboard on the Go
+- **Real-time Stats**: View application counts and statuses
+- **Infinite Scroll**: Efficiently browse long lists of applications
+- **Pull-to-Refresh**: Update data with a simple gesture
+
+### 6.3 Mobile Folder Structure
+
+```
+mobile/
+├── src/
+│   ├── api/             # API configuration (Axios)
+│   ├── assets/          # Images and fonts
+│   ├── components/      # Reusable UI components
+│   │   ├── ProfileContent.js
+│   │   └── ...
+│   ├── context/         # Auth & Theme Contexts
+│   ├── navigation/      # Stack & Tab Navigators
+│   └── screens/         # Application screens
+│       ├── DashboardScreen.js
+│       ├── LoginScreen.js
+│       └── SignupScreen.js
+├── App.js              # Entry point
+└── app.json            # Expo configuration
+```
+
+---
+
+## 7. UI/UX Design
+
 
 ### 6.1 My Design Philosophy
 
@@ -649,44 +714,62 @@ Delete application.
 
 ## 10. Deployment
 
-### 10.1 Development Setup
+### 10.1 Production Architecture
 
-#### Backend
-```bash
-cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+- **Backend**: Hosted on **AWS EC2** (Ubuntu) using **Gunicorn** as the application server and **Nginx** as a reverse proxy.
+- **Frontend**: Deployed on **Vercel** with global CDN distribution.
+- **Database**: **PostgreSQL** (Production) hosted on AWS/RDS or similar provider.
+- **Domain**: Custom domain `jobtracker.kaysarulanas.me` with SSL via Let's Encrypt.
+
+### 10.2 Backend Deployment (AWS)
+
+#### Infrastructure Setup
+1. **EC2 Instance**: t2.micro (Free Tier), Ubuntu 22.04 LTS
+2. **Security Groups**: Allow HTTP (80), HTTPS (443), SSH (22)
+3. **Database**: PostgreSQL installed and secured
+
+#### Service Configuration
+**Gunicorn Systemd Service:**
+```ini
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/Job-Application-Tracker-Full-Stack/backend
+ExecStart=/home/ubuntu/Job-Application-Tracker-Full-Stack/backend/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          backend.wsgi:application
 ```
 
-#### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
+**Nginx Configuration:**
+- Reverse proxy to Gunicorn socket
+- Static file serving (`/static/`)
+- SSL termination (Certbot/Let's Encrypt)
+- CORS headers for Vercel frontend
 
-### 10.2 Environment Variables
+### 10.3 Frontend Deployment (Vercel)
 
-#### Backend (.env)
-```bash
-SECRET_KEY=your-secret-key
-DEBUG=True
-ALLOWED_HOSTS=localhost,127.0.0.1
-CORS_ALLOWED_ORIGINS=http://localhost:5173
-```
+- **Build Command**: `vite build`
+- **Output Directory**: `dist`
+- **Environment Variables**:
+  - `VITE_API_URL`: Points to https://api.jobtracker.kaysarulanas.me
+  - `VITE_GOOGLE_CLIENT_ID`: Production OAuth credentials
 
-#### Frontend (.env)
-```bash
-VITE_API_URL=http://127.0.0.1:8000/
-VITE_GOOGLE_CLIENT_ID=your-google-client-id
-```
+### 10.4 Mobile Distribution
+
+- **Expo Application Services (EAS)**:
+  - `eas build -p android`: Generates APK/AAB for Android
+  - `eas build -p ios`: Generates IPA for iOS (requires Apple Developer Account)
+- **Over-the-Air Updates**: Push JavaScript updates directly to users via `eas update`
 
 ---
 
-## 11. Testing
+## 11. Testing & Future Roadmap
 
 ### 11.1 Testing Approach
 

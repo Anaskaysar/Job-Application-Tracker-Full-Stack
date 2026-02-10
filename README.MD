@@ -5,9 +5,15 @@ A professional job application tracking system designed to help users organize t
 ## 🔗 Live Production Links
 - **Web App**: [https://jobtracker.kaysarulanas.me](https://jobtracker.kaysarulanas.me) (Vercel)
 - **API (Admin)**: [https://api.jobtracker.kaysarulanas.me/admin/](https://api.jobtracker.kaysarulanas.me/admin/) (AWS EC2)
-- **Documentation**: [Full-Stack Strategy & Architecture](docs/STRATEGY.md)
+- **Full Project Report**: [Detailed System Architecture & Features](docs/project_report.md)
 
 ## 🚀 Features
+### 📱 Mobile (New!)
+- **Native Experience**: React Native app for iOS and Android.
+- **On-the-Go**: Manage applications from anywhere with offline support.
+- **Secure Auth**: Biometic-ready secure login storage.
+
+### 💻 Web & API
 - **Secure Authentication**: JWT-based login and registration (Google OAuth supported).
 - **Job Tracking**: Manage company names, positions, stages, and application dates.
 - **One-to-Many File Support**: Attach multiple resumes, portfolios, or cover letters.

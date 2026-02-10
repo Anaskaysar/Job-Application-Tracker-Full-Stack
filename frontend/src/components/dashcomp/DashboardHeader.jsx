@@ -1,4 +1,5 @@
 import { Briefcase, ChevronDown, LogOut, Search, Settings, User } from 'lucide-react';
+import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const DashboardHeader = ({ 
@@ -14,6 +15,23 @@ const DashboardHeader = ({
   setActiveView 
 }) => {
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+
+    if (isProfileOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isProfileOpen, setIsProfileOpen]);
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-40">
@@ -47,7 +65,7 @@ const DashboardHeader = ({
             <div className="h-6 w-px bg-gray-200 mx-2 hidden sm:block"></div>
 
             {/* Profile Dropdown */}
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button 
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
                 className="flex items-center gap-2 p-1 pr-2 rounded-full hover:bg-gray-100 transition-all border border-transparent hover:border-gray-200"
