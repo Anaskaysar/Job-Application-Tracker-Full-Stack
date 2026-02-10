@@ -16,6 +16,9 @@ class ApplicationViewSet(viewsets.ModelViewSet):
         # Only return applications belonging to the current user
         return self.request.user.applications.all()
 
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
     def perform_create(self, serializer):
         # Automatically set the user to the current logged-in user
         serializer.save(user=self.request.user)

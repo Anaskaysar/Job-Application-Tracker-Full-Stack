@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Briefcase, Lock, Mail, UserCircle2 } from 'lucide-react-native';
+import { Briefcase, Lock, Mail, UserCircle2 } from 'lucide-native';
 import { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
@@ -27,6 +27,7 @@ const { width } = Dimensions.get('window');
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const { login, loading, error } = useAuth();
     const { theme, isDarkMode } = useTheme();
 
@@ -103,9 +104,19 @@ const LoginScreen = ({ navigation }) => {
                             placeholder="Password"
                             value={password}
                             onChangeText={setPassword}
-                            secureTextEntry
+                            secureTextEntry={!showPassword}
                             placeholderTextColor={theme.textSecondary}
                         />
+                        <TouchableOpacity
+                            style={styles.eyeBtn}
+                            onPress={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? (
+                                <EyeOff color={theme.textSecondary} size={20} />
+                            ) : (
+                                <Eye color={theme.textSecondary} size={20} />
+                            )}
+                        </TouchableOpacity>
                     </View>
 
                     <TouchableOpacity style={styles.forgotPassword}>
@@ -226,8 +237,11 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         paddingVertical: 14,
-        paddingRight: 16,
+        paddingRight: 8,
         fontSize: 16,
+    },
+    eyeBtn: {
+        padding: 14,
     },
     forgotPassword: {
         alignSelf: 'flex-end',

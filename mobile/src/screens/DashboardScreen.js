@@ -208,7 +208,7 @@ const DashboardScreen = ({ navigation }) => {
                 <View style={styles.section}>
                     <View style={styles.sectionHeader}>
                         <Text style={[styles.sectionTitle, { color: theme.text }]}>Recent Applications</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('ApplicationList')}>
                             <Text style={[styles.seeAll, { color: theme.primary }]}>See All</Text>
                         </TouchableOpacity>
                     </View>

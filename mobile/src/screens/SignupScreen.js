@@ -10,6 +10,7 @@ const SignupScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const { register, loading, error } = useAuth();
     const { theme, isDarkMode } = useTheme();
 
@@ -93,9 +94,19 @@ const SignupScreen = ({ navigation }) => {
                             placeholder="Password"
                             value={password}
                             onChangeText={setPassword}
-                            secureTextEntry
+                            secureTextEntry={!showPassword}
                             placeholderTextColor={theme.textSecondary}
                         />
+                        <TouchableOpacity
+                            style={styles.eyeBtn}
+                            onPress={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? (
+                                <EyeOff color={theme.textSecondary} size={20} />
+                            ) : (
+                                <Eye color={theme.textSecondary} size={20} />
+                            )}
+                        </TouchableOpacity>
                     </View>
 
                     <TouchableOpacity
@@ -193,8 +204,11 @@ const styles = StyleSheet.create({
     input: {
         flex: 1,
         paddingVertical: 14,
-        paddingRight: 16,
+        paddingRight: 8,
         fontSize: 16,
+    },
+    eyeBtn: {
+        padding: 14,
     },
     button: {
         marginTop: 8,

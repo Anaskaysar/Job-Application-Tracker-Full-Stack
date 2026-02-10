@@ -9,12 +9,12 @@ import {
     SearchControls,
     StatsSection
 } from '../../components/dashcomp';
+import ApplicationFormModal from '../../components/dashcomp/ApplicationFormModal';
 import ProfileSection from '../../components/dashcomp/ProfileSection';
 import ReviewForm from '../../components/dashcomp/ReviewForm';
 import EmailVerificationBanner from '../../components/EmailVerificationBanner';
 import { useAuth } from '../../context/AuthContext';
 import { sampleApplications } from './sampleData';
-
 const DashBoard = ({ isDemo = false }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -26,8 +26,35 @@ const DashBoard = ({ isDemo = false }) => {
   const [applications, setApplications] = useState(isDemo ? sampleApplications : []);
   const [loading, setLoading] = useState(!isDemo);
   const [searchQuery, setSearchQuery] = useState('');
+  const [editingApp, setEditingApp] = useState(null);
 
   const statuses = ["Applied", "Interview", "Offer", "Rejected"];
+
+  const handleCreateClick = () => {
+    setEditingApp(null);
+    setShowAddModal(true);
+  };
+
+  const handleEditClick = (app) => {
+    setEditingApp(app);
+    setShowAddModal(true);
+  };
+
+  const handleDeleteApplication = async (app) => {
+    if (!confirm(`Are you sure you want to delete ${app.company_name}?`)) return;
+
+    try {
+      await api.delete(`/api/applications/${app.id}/`);
+      fetchApplications();
+    } catch (error) {
+      console.error("Failed to delete application", error);
+    }
+  };
+
+  const handleSuccess = () => {
+    fetchApplications();
+    setShowAddModal(false);
+  };
 
   // Helper: Get Initials (e.g., "John Doe" -> "JD")
   const getInitials = (name) => {
@@ -104,7 +131,7 @@ const DashBoard = ({ isDemo = false }) => {
         <StatsSection
           statuses={statuses}
           filteredApplications={filteredApplications}
-          setShowAddModal={setShowAddModal}
+          setShowAddModal={handleCreateClick}
         />
       )}
 
@@ -118,6 +145,7 @@ const DashBoard = ({ isDemo = false }) => {
               activeView={activeView}
               setActiveView={setActiveView}
             />
+            {/* <KoFiBanner /> */}
             <EmailVerificationBanner user={user} />
           </>
         )}
@@ -137,12 +165,16 @@ const DashBoard = ({ isDemo = false }) => {
                 filteredApplications={filteredApplications}
                 setSelectedApp={setSelectedApp}
                 getStatusColor={getStatusColor}
+                onEdit={handleEditClick}
+                onDelete={handleDeleteApplication}
               />
             ) : (
               <ListView
                 filteredApplications={filteredApplications}
                 setSelectedApp={setSelectedApp}
                 getStatusColor={getStatusColor}
+                onEdit={handleEditClick}
+                onDelete={handleDeleteApplication}
               />
             );
           })()
@@ -191,6 +223,14 @@ const DashBoard = ({ isDemo = false }) => {
           Share Your Feedback
         </button>
       )}
+
+      {/* Application Form Modal */}
+      <ApplicationFormModal
+        isOpen={showAddModal}
+        onClose={() => setShowAddModal(false)}
+        onSuccess={handleSuccess}
+        initialData={editingApp}
+      />
     </div>
   );
 };

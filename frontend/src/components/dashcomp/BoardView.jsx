@@ -1,7 +1,7 @@
 import { Plus } from 'lucide-react';
 import ApplicationCard from './ApplicationCard';
 
-const BoardView = ({ statuses, filteredApplications, setSelectedApp, getStatusColor }) => {
+const BoardView = ({ statuses, filteredApplications, setSelectedApp, getStatusColor, onEdit, onDelete }) => {
   return (
     <div className="flex gap-6 overflow-x-auto pb-8 pr-12 h-[calc(100vh-280px)] min-h-[500px]">
       {statuses.map(status => (
@@ -26,6 +26,8 @@ const BoardView = ({ statuses, filteredApplications, setSelectedApp, getStatusCo
                   app={app} 
                   setSelectedApp={setSelectedApp}
                   getStatusColor={getStatusColor}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
                 />
               ))}
             {filteredApplications.filter(app => app.status === status).length === 0 && (

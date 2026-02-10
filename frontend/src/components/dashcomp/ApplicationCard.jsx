@@ -1,6 +1,6 @@
-import { Calendar, Edit2, FileText } from 'lucide-react';
+import { Calendar, Edit2, FileText, Trash2 } from 'lucide-react';
 
-const ApplicationCard = ({ app, setSelectedApp, getStatusColor }) => {
+const ApplicationCard = ({ app, setSelectedApp, getStatusColor, onEdit, onDelete }) => {
   return (
     <div 
       className="bg-white rounded-xl border border-gray-200 p-4 mb-3 hover:shadow-lg transition-all cursor-pointer group relative"
@@ -11,9 +11,18 @@ const ApplicationCard = ({ app, setSelectedApp, getStatusColor }) => {
           <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{app.company_name}</h3>
           <p className="text-sm text-gray-600">{app.position_title}</p>
         </div>
-        <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-          <button className="p-1 hover:bg-gray-100 rounded text-gray-400 hover:text-blue-600">
+        <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          <button 
+            onClick={(e) => { e.stopPropagation(); onEdit(app); }}
+            className="p-1.5 hover:bg-blue-50 rounded-lg text-gray-400 hover:text-blue-600 transition-colors"
+          >
             <Edit2 size={14} />
+          </button>
+          <button 
+            onClick={(e) => { e.stopPropagation(); onDelete(app); }}
+            className="p-1.5 hover:bg-red-50 rounded-lg text-gray-400 hover:text-red-600 transition-colors"
+          >
+            <Trash2 size={14} />
           </button>
         </div>
       </div>

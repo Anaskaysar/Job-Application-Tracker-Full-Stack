@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
 // Screens
+import ApplicationListScreen from '../screens/ApplicationListScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
@@ -37,6 +38,7 @@ const AppNavigator = () => {
                     // Authenticated Stack
                     <>
                         <Stack.Screen name="Dashboard" component={DashboardScreen} />
+                        <Stack.Screen name="ApplicationList" component={ApplicationListScreen} />
                     </>
                 ) : (
                     // Auth Stack

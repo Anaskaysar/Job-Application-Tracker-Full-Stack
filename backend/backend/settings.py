@@ -199,17 +199,25 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+# Email Backend Configuration
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+    EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+    EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# Custom Social Account Adapter for Auto-Username Generation
+SOCIALACCOUNT_ADAPTER = 'applications.adapters.CustomSocialAccountAdapter'
+
 ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
-
-# Email Backend for Development (Console)
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# Custom Social Account Adapter for Auto-Username Generation
-SOCIALACCOUNT_ADAPTER = 'applications.adapters.CustomSocialAccountAdapter'
+ACCOUNT_UNIQUE_EMAIL = True
 
 # Custom Registration Serializer to handle 'name' field
 REST_AUTH_REGISTER_SERIALIZERS = {

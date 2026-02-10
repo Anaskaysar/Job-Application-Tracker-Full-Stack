@@ -84,7 +84,7 @@ const SupportPage = () => {
                 
                 <div className="space-y-4">
                   <a 
-                    href="https://ko-fi.com/anaskaysar" 
+                    href="https://ko-fi.com/kaysarulanas" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-4 bg-white text-blue-600 font-black rounded-2xl hover:bg-blue-50 transition-all shadow-lg active:scale-[0.98]"
