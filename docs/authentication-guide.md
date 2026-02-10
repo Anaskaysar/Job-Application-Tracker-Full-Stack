@@ -44,6 +44,15 @@ During the integration "handshake," we encountered several critical hurdles. Her
 - **Discovery**: The backend was sending a `key` (Standard Token), but the frontend was looking for `access` (JWT).
 - **The Fix**: Hardened `AuthContext.jsx` and `axios.js` to support BOTH formats automatically.
 
+### Phase 5: Production Security (COOP & CSRF)
+- **The Error**: Google Login blocked by browser in production; Admin panel rejected logins.
+- **Discovery**: 
+  - `Cross-Origin-Opener-Policy` (COOP) headers were preventing the Google popup from talking to the main site.
+  - `CSRF_TRUSTED_ORIGINS` was missing the API's own domain, blocking admin logins.
+- **The Fix**:
+  - Set `SECURE_CROSS_ORIGIN_OPENER_POLICY = None` (default) to allow OAuth popups.
+  - Added `https://api.jobtracker.kaysarulanas.me` to `CSRF_TRUSTED_ORIGINS`.
+
 ---
 
 ## 3. Final Security & Best Practices

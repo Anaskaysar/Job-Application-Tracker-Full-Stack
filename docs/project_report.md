@@ -2,7 +2,7 @@
 
 **Developer:** Kaysarul Anas  
 **Technology Stack:** Django REST Framework + React (Vite)  
-**Report Date:** February 8, 2026  
+**Report Date:** February 10, 2026  
 **Project Status:** Active Development
 
 ---
@@ -18,7 +18,8 @@ I built the Job Application Tracker as a full-stack web application to help job 
 - ✅ Ensured user-specific data isolation and security
 - ✅ Developed file upload and management system
 - ✅ Designed responsive dashboard with multiple view modes
-- ✅ Configured production-ready deployment setup
+- ✅ Deployed Backend to AWS EC2 with Gunicorn and Nginx
+- ✅ Deployed Frontend to Vercel with custom domain mapping
 
 ---
 
@@ -556,6 +557,14 @@ During development, I encountered and resolved several issues:
 **Problem**: Axios interceptor attached tokens to login requests  
 **Solution**: Excluded auth endpoints from token attachment
 
+#### Challenge 4: COOP Headers (Google Login)
+**Problem**: Google Login blocked in production by browser security  
+**Solution**: Removed conflicting `same-origin-allow-popups` headers from `vercel.json` and set `SECURE_CROSS_ORIGIN_OPENER_POLICY = None` in Django.
+
+#### Challenge 5: Admin CSRF Failures
+**Problem**: Cloud Admin panel rejected all login attempts  
+**Solution**: Added the API domain to `CSRF_TRUSTED_ORIGINS`.
+
 ---
 
 ## 8. Database Design
@@ -588,7 +597,7 @@ python manage.py migrate
 ### 9.1 Base URL
 
 - **Development**: `http://127.0.0.1:8000/`
-- **Production**: `https://your-domain.com/`
+- **Production**: `https://api.jobtracker.kaysarulanas.me/`
 
 ### 9.2 Authentication Endpoints
 

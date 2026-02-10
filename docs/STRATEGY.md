@@ -6,9 +6,9 @@ This document outlines the production deployment strategy for JobTracker and the
 
 | Component | Platform | URL | Status |
 | :--- | :--- | :--- | :--- |
-| **Frontend (Web)** | Vercel | [https://jobtracker.kaysarulanas.me](https://jobtracker.kaysarulanas.me) | ✅ Live |
-| **API (Backend)** | AWS EC2 | [https://api.jobtracker.kaysarulanas.me](https://api.jobtracker.kaysarulanas.me) | ✅ Live |
-| **Database** | PostgreSQL | AWS Local | ✅ Live |
+| **Frontend (Web)** | Vercel | [https://jobtracker.kaysarulanas.me](https://jobtracker.kaysarulanas.me) | ✅ Production Live |
+| **API (Backend)** | AWS EC2 | [https://api.jobtracker.kaysarulanas.me](https://api.jobtracker.kaysarulanas.me) | ✅ Production Live |
+| **Database** | PostgreSQL | AWS Local Instance | ✅ Live |
 
 ## 🏗 System Architecture
 
