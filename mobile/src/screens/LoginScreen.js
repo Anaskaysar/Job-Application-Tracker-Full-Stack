@@ -51,6 +51,15 @@ const LoginScreen = ({ navigation }) => {
         } catch (err) { }
     };
 
+    const handleGoogleLogin = async () => {
+        try {
+            // This is where the Google Auth Session (expo-auth-session) would trigger
+            console.log("Triggering Google Login flow...");
+            // For now, it shows the ready state. 
+            // await googleLogin(tokenFromGoogle);
+        } catch (err) { }
+    };
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -129,7 +138,11 @@ const LoginScreen = ({ navigation }) => {
                     </View>
 
                     <View style={styles.socialContainer}>
-                        <TouchableOpacity style={[styles.socialButton, { backgroundColor: theme.card, borderColor: theme.border }]}>
+                        <TouchableOpacity
+                            style={[styles.socialButton, { backgroundColor: theme.card, borderColor: theme.border }]}
+                            onPress={handleGoogleLogin}
+                            disabled={loading}
+                        >
                             <Image
                                 source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2991/2991148.png' }}
                                 style={styles.socialIcon}

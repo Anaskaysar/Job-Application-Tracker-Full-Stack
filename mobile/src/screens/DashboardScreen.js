@@ -3,13 +3,13 @@ import {
     Bell,
     Briefcase,
     CheckCircle2,
-    Clock,
     LogOut,
     Moon,
     Plus,
     Sun,
     XCircle
 } from 'lucide-react-native';
+import { useEffect, useState } from 'react';
 import {
     Dimensions,
     ScrollView,
@@ -20,6 +20,7 @@ import {
     View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
@@ -28,19 +29,74 @@ const { width } = Dimensions.get('window');
 const DashboardScreen = ({ navigation }) => {
     const { user, logout } = useAuth();
     const { theme, isDarkMode, toggleTheme } = useTheme();
+    const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    const fetchApplications = async () => {
+        if (!user) {
+            // Guest mode: Use dummy data
+            setApplications([
+                { id: 1, company_name: 'Google', position_title: 'Frontend Developer', status: 'Applied', applied_at: '2 hours ago' },
+                { id: 2, company_name: 'Meta', position_title: 'React Native Engineer', status: 'Interview', applied_at: 'Yesterday' },
+                { id: 3, company_name: 'Amazon', position_title: 'Software Engineer', status: 'Pending', applied_at: '3 days ago' },
+            ]);
+            setLoading(false);
+            return;
+        }
+
+        try {
+            setLoading(true);
+            const response = await api.get('/api/applications/');
+            setApplications(response.data);
+        } catch (error) {
+            console.error("Failed to fetch applications", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchApplications();
+    }, []);
 
     const stats = [
-        { id: '1', label: 'Applied', count: 12, icon: Briefcase, color: isDarkMode ? '#818CF8' : '#2563EB' },
-        { id: '2', label: 'Pending', count: 5, icon: Clock, color: '#F59E0B' },
-        { id: '3', label: 'Interview', count: 3, icon: CheckCircle2, color: '#10B981' },
-        { id: '4', label: 'Rejected', count: 4, icon: XCircle, color: '#EF4444' },
+        {
+            id: '1',
+            label: 'Applied',
+            count: applications.filter(a => a.status === 'Applied').length,
+            icon: Briefcase,
+            color: isDarkMode ? '#818CF8' : '#2563EB'
+        },
+        {
+            id: '2',
+            label: 'Interview',
+            count: applications.filter(a => a.status === 'Interview').length,
+            icon: CheckCircle2,
+            color: '#10B981'
+        },
+        {
+            id: '3',
+            label: 'Offer',
+            count: applications.filter(a => a.status === 'Offer').length,
+            icon: CheckCircle2,
+            color: '#8B5CF6'
+        },
+        {
+            id: '4',
+            label: 'Rejected',
+            count: applications.filter(a => a.status === 'Rejected').length,
+            icon: XCircle,
+            color: '#EF4444'
+        },
     ];
 
-    const recentApps = [
-        { id: '1', company: 'Google', position: 'Frontend Developer', status: 'Applied', date: '2 hours ago' },
-        { id: '2', company: 'Meta', position: 'React Native Engineer', status: 'Interview', date: 'Yesterday' },
-        { id: '3', company: 'Amazon', position: 'Software Engineer', status: 'Pending', date: '3 days ago' },
-    ];
+    const recentApps = applications.slice(0, 5).map(app => ({
+        id: app.id.toString(),
+        company: app.company_name,
+        position: app.position_title,
+        status: app.status,
+        date: app.applied_at || 'Recently'
+    }));
 
     const renderStatCard = (item) => (
         <View key={item.id} style={[styles.statCardInner, { width: (width - 48 - 12) / 2 }]}>
@@ -71,7 +127,10 @@ const DashboardScreen = ({ navigation }) => {
                     <TouchableOpacity style={[styles.iconButton, { backgroundColor: theme.card, borderColor: theme.border }]}>
                         <Bell color={theme.textSecondary} size={22} />
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.iconButton, { backgroundColor: theme.card, borderColor: theme.border === '#E2E8F0' ? '#FEE2E2' : '#7F1D1D' }]} onPress={logout || (() => navigation.navigate('Login'))}>
+                    <TouchableOpacity
+                        style={[styles.iconButton, { backgroundColor: theme.card, borderColor: theme.border === '#E2E8F0' ? '#FEE2E2' : '#7F1D1D' }]}
+                        onPress={logout}
+                    >
                         <LogOut color="#EF4444" size={20} />
                     </TouchableOpacity>
                 </View>

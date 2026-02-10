@@ -62,6 +62,83 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
+    const register = async (username, email, password) => {
+        try {
+            setLoading(true);
+            setError(null);
+            const response = await api.post("/api/auth/registration/", {
+                username,
+                email,
+                password1: password,
+                password2: password
+            });
+
+            const accessToken = response.data.access || response.data.access_token || response.data.key;
+            const refreshToken = response.data.refresh || response.data.refresh_token;
+            let userData = response.data.user;
+
+            if (accessToken) {
+                await AsyncStorage.setItem("access_token", accessToken);
+                if (refreshToken) await AsyncStorage.setItem("refresh_token", refreshToken);
+
+                if (!userData) {
+                    const userRes = await api.get("/api/auth/user/");
+                    userData = userRes.data;
+                }
+                setUser(userData);
+            }
+            return response.data;
+        } catch (error) {
+            const data = error.response?.data;
+            let errorMsg = "Registration failed";
+            if (data) {
+                if (typeof data === 'string') errorMsg = data;
+                else if (data.email) errorMsg = `Email: ${data.email[0]}`;
+                else if (data.username) errorMsg = `Username: ${data.username[0]}`;
+                else if (data.password) errorMsg = `Password: ${data.password[0]}`;
+                else if (data.non_field_errors) errorMsg = data.non_field_errors[0];
+            }
+            setError(errorMsg);
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const googleLogin = async (googleAccessToken) => {
+        try {
+            setLoading(true);
+            setError(null);
+
+            // Send the Google access token to your backend SocialLoginView
+            const response = await api.post("/api/auth/google/", {
+                access_token: googleAccessToken,
+            });
+
+            const accessToken = response.data.access || response.data.access_token || response.data.key;
+            const refreshToken = response.data.refresh || response.data.refresh_token;
+            let userData = response.data.user;
+
+            if (accessToken) {
+                await AsyncStorage.setItem("access_token", accessToken);
+                if (refreshToken) await AsyncStorage.setItem("refresh_token", refreshToken);
+
+                if (!userData) {
+                    const userRes = await api.get("/api/auth/user/");
+                    userData = userRes.data;
+                }
+                setUser(userData);
+            }
+            return response.data;
+        } catch (error) {
+            console.error("Google login failed", error);
+            setError("Google login failed. Please try again.");
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const logout = async () => {
         try {
             await api.post("/api/auth/logout/");
@@ -75,7 +152,7 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, loading, error, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, error, login, register, googleLogin, logout }}>
             {children}
         </AuthContext.Provider>
     );

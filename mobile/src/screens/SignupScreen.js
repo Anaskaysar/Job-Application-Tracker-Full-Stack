@@ -14,7 +14,8 @@ const SignupScreen = ({ navigation }) => {
 
     const handleSignup = async () => {
         try {
-            // Logic here
+            await register(username, email, password);
+            // Navigation is usually handled by the Auth state change (user becoming non-null)
         } catch (err) { }
     };
 
