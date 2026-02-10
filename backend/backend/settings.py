@@ -156,15 +156,15 @@ CORS_ALLOW_ALL_ORIGINS = DEBUG  # Allow all in debug mode only
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF configuration
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://jobtracker.kaysarulanas.me').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://jobtracker.kaysarulanas.me,https://api.jobtracker.kaysarulanas.me').split(',')
 
 # Production Security
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    # Required for Google OAuth popups in some browsers
-    SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
+    # Default is safer for Google OAuth popups
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 # Django REST Framework configuration
 REST_FRAMEWORK = {
