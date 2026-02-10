@@ -11,6 +11,7 @@ import {
 } from '../../components/dashcomp';
 import ProfileSection from '../../components/dashcomp/ProfileSection';
 import ReviewForm from '../../components/dashcomp/ReviewForm';
+import EmailVerificationBanner from '../../components/EmailVerificationBanner';
 import { useAuth } from '../../context/AuthContext';
 import { sampleApplications } from './sampleData';
 

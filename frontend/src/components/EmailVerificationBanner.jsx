@@ -1,6 +1,6 @@
 import { Mail, X } from "lucide-react";
 import { useState } from "react";
-import api from "../../api/axios";
+import api from "../api/axios";
 
 const EmailVerificationBanner = ({ user }) => {
   const [dismissed, setDismissed] = useState(false);
