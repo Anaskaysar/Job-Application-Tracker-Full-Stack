@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTracker - Branding & Logo Design Report</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Mermaid.js for Diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #4f46e5;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --bg-page: #ffffff;
+            --bg-code: #f3f4f6;
+            --border: #e5e7eb;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 60px;
+            background-color: var(--bg-page);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+
+        /* Branding Banner */
+        .print-banner {
+            background: #111827;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .print-banner h1 {
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .print-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .print-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        /* Markdown Styling */
+        #content h1 { 
+            font-size: 3rem; 
+            margin-top: 0; 
+            margin-bottom: 40px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        #content h2 { 
+            font-size: 1.8rem; 
+            margin-top: 50px; 
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border); 
+            padding-bottom: 10px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        #content h3 { 
+            font-size: 1.4rem; 
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        #content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        #content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        #content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        pre {
+            background-color: var(--bg-code);
+            padding: 20px;
+            border-radius: 12px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            margin: 25px 0;
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9em;
+            background-color: var(--bg-code);
+            padding: 3px 6px;
+            border-radius: 6px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #111827;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        blockquote {
+            border-left: 5px solid var(--primary);
+            margin: 30px 0;
+            padding: 20px 30px;
+            background-color: #eff6ff;
+            color: var(--primary-dark);
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 40px 0;
+        }
+
+        /* Mermaid Diagram Styling */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Print Settings */
+        @media print {
+            .print-banner { display: none; }
+            body { background-color: white; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            #content h1 { background: none; -webkit-text-fill-color: initial; color: black; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-banner">
+        <h1>Design Assets Preview</h1>
+        <button class="print-btn" onclick="window.print()">Export Report to PDF</button>
+    </div>
+
+    <div class="container" id="content">
+        <!-- Content will be injected here -->
+    </div>
+
+    <script id="markdown-raw" type="text/markdown">
+# JobTracker Branding & Logo Design Report
+
+**Developer:** Kaysarul Anas  
+**Brand Identity:** JobTracker  
+**Date:** February 9, 2026
+
+---
+
+## 1. Design Concept: "The Modern Professional"
+
+The JobTracker logo was designed to bridge the gap between traditional professional values and modern technological efficiency.
+
+```mermaid
+graph LR
+    A[Professionalism] --> B(Briefcase Icon)
+    C[Modern Efficiency] --> B
+    B --> D{JobTracker Brand}
+    D --> E[Web Interface]
+    D --> F[Mobile App]
+```
+
+### 1.1 The Iconography
+- **The Briefcase**: Universal symbol for work and professionalism. It suggests tool-readiness and a career journey.
+- **The Style**: Line-art variant (`lucide-react`) for a light, modern aesthetic.
+
+---
+
+## 2. Visual Language
+
+### 2.1 Color Strategy (The Success Gradient)
+The logo utilizes a vibrant gradient from **Core Blue** to **Deep Indigo**.
+
+*   **Blue (#2563EB)**: Stability, trust, and intelligence.
+*   **Indigo (#4F46E5)**: Ambition, creativity, and premium quality.
+
+### 2.2 Branding Pillars
+```mermaid
+graph TD
+    subgraph "Design Pillars"
+        P1[Clarity] --- P2[Consistency]
+        P2 --- P3[Motion]
+    end
+    P1 -->|Web| W[Static High-Contrast]
+    P2 -->|Global| G[Unified Gradient]
+    P3 -->|Mobile| M[3D Animations]
+```
+
+---
+
+## 3. Platform-Specific Optimizations
+
+### 3.1 Web (Static & High-Contrast)
+Focus on **clarity at various scales**. Responsive styling in the Navbar (small) and Auth pages (large).
+
+### 3.2 Mobile (Alive & Interactive)
+On mobile, we introduced **Motion** as a key brand element:
+- **3D Floating Animation**: Subtile Y-axis bobbing on the Welcome screen.
+- **Perspective Tilt**: Native 3D rotation on X and Y axes.
+- **Aura Glow**: Pulsing radial gradient for depth and "heartbeat" feel.
+- **Welcome Sequence**: A 6-second immersion window to establish brand identity.
+
+---
+
+## 4. Logo Implementations
+
+| Version | Context | Primary Icon | Styling |
+| :--- | :--- | :--- | :--- |
+| **Main Brand** | Auth Pages | Briefcase | Large Gradient Box + Shadow |
+| **Navigator** | Navbar | Briefcase | Minimalist Icon + Light BG |
+| **Interactive** | Mobile Welcome | Briefcase | 3D Floating + Tilt + Aura Glow |
+
+---
+> The JobTracker logo is more than an icon—it is a promise of organization and a catalyst for professional growth.
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const raw = document.getElementById('markdown-raw').innerHTML;
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = marked.parse(raw);
+            
+            // Convert Mermaid code blocks to div.mermaid
+            const codeBlocks = contentDiv.querySelectorAll('code.language-mermaid');
+            codeBlocks.forEach(block => {
+                const pre = block.parentElement;
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = block.textContent;
+                pre.parentElement.replaceChild(div, pre);
+            });
+            
+            // Initialize Mermaid
+            mermaid.initialize({ 
+                startOnLoad: true, 
+                theme: 'neutral',
+                fontFamily: 'Inter'
+            });
+            
+            // Re-render
+            mermaid.run();
+        });
+    </script>
+</body>
+</html>

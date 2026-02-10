@@ -1,7 +1,8 @@
-import { Briefcase, ChevronDown, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
+import { ChevronDown, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Logo from "./Logo";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -86,13 +87,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className={`p-2 rounded-lg transition-colors ${isScrolled ? 'bg-blue-600' : 'bg-blue-600/10'}`}>
-              <Briefcase className={isScrolled ? 'text-white' : 'text-blue-600'} size={24} />
-            </div>
-            <span className={`text-xl font-bold tracking-tight transition-colors ${isScrolled ? 'text-gray-900' : 'text-gray-900'}`}>
-              Job Tracker
-            </span>
+          <Link to="/">
+            <Logo size="sm" variant={isScrolled ? "gradient" : "light"} className="text-gray-900" />
           </Link>
 
           {/* Desktop Navigation */}

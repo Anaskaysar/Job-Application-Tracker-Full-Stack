@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobTracker Mobile - Development Report</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Marked.js for Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Mermaid.js for Diagram rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #3730a3;
+            --secondary: #7c3aed;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-page: #ffffff;
+            --bg-code: #f1f5f9;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 80px;
+            background-color: var(--bg-page);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+        }
+
+        /* Branding Banner */
+        .print-banner {
+            background: #0f172a;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .print-banner h1 {
+            font-size: 1rem;
+            margin: 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .print-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+        }
+
+        .print-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Markdown Styling */
+        #content h1 { 
+            font-size: 3.5rem; 
+            margin-top: 0; 
+            margin-bottom: 50px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: left;
+            line-height: 1.1;
+        }
+
+        #content h2 { 
+            font-size: 2rem; 
+            margin-top: 60px; 
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #content h2::before {
+            content: '';
+            width: 4px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        #content h3 { 
+            font-size: 1.5rem; 
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        #content p {
+            margin-bottom: 1.6rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        #content ul {
+            margin-bottom: 1.6rem;
+            padding-left: 1.5rem;
+            list-style-type: none;
+        }
+
+        #content li {
+            position: relative;
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            padding-left: 28px;
+        }
+
+        #content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        pre {
+            background-color: var(--bg-code);
+            padding: 24px;
+            border-radius: 16px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9em;
+            background-color: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #334155;
+            font-weight: 400;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 40px 0;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        th, td {
+            text-align: left;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            font-weight: 800;
+            color: #0f172a;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        blockquote {
+            border-left: none;
+            margin: 40px 0;
+            padding: 30px 40px;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            color: var(--primary-dark);
+            border-radius: 20px;
+            font-style: italic;
+            font-size: 1.25rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 60px 0;
+        }
+
+        /* Mermaid Diagram Styling */
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Print Settings */
+        @media print {
+            .print-banner { display: none; }
+            body { background-color: white; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            #content h1 { background: none; -webkit-text-fill-color: initial; color: black; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="print-banner">
+        <h1>Tech Documentation Portal</h1>
+        <button class="print-btn" onclick="window.print()">Export to PDF</button>
+    </div>
+
+    <div class="container" id="content">
+        <!-- Content will be injected here -->
+    </div>
+
+    <script id="markdown-raw" type="text/markdown">
+# JobTracker Mobile - Development Report
+
+**Developer:** Kaysarul Anas  
+**Technology Stack:** React Native (Expo) + Reanimated + Lucide  
+**Report Date:** February 9, 2026  
+**Project Status:** 🟢 UI/UX & Core Navigation Complete  
+
+---
+
+## 1. Executive Summary
+
+The **JobTracker Mobile** app is the companion application to the Job Application Tracker web platform. It objective is to provide job seekers with a premium, high-performance mobile experience to track their applications on the go.
+
+### Key Objectives
+- 💎 **Modern UI**: Achieve a high-end, "wow" factor design.
+- ✅ **Native Experience**: High-performance iOS and Android builds via Expo.
+- ✅ **Seamless Integration**: Direct connection to Django REST API.
+- ✅ **Premium UX**: Fluid 3D animations and micro-interactions.
+- ✅ **Auth Security**: JWT token management and secure persistence.
+
+---
+
+## 2. Design Philosophy & Thought Process
+
+### From Dark to Light (and Back)
+We initially developed a premium **Dark Mode** focusing on depth. Upon aligning with the web branding, we refactored the app to support a **Theme-Driven Architecture**.
+- 💡 **Light Mode**: Professional readability (`#F8FAFC` background).
+- 🌑 **Dark Mode**: Tech-focused immersion (`#0F172A` background).
+
+### Premium Elements
+- **3D Animations**: Uses `react-native-reanimated` for a 3D floating briefcase on the Welcome screen.
+- **Cinematic Transitions**: A 6-second Welcome sequence provides a smooth entry, fading into the auth flow once brand immersion is complete.
+
+---
+
+## 3. Technical Architecture
+
+### Architecture Overview
+```mermaid
+graph TB
+    subgraph "Mobile App"
+        A[React Native UI]
+        B[Navigation]
+        C[State Management<br/>Context API]
+        D[API Client<br/>Axios]
+        E[Local Storage<br/>AsyncStorage]
+    end
+    
+    subgraph "External Services"
+        G[Django REST API]
+        H[Google OAuth]
+        I[Push Notification Service]
+    end
+    
+    A --> B
+    A --> C
+    C --> D
+    C --> E
+    D --> G
+    B --> A
+    G --> D
+    H --> D
+    I --> A
+```
+
+### Authentication Sequence
+```mermaid
+sequenceDiagram
+    participant User
+    participant App
+    participant Storage
+    participant API
+    participant Welcome
+
+    User->>App: Open App
+    App->>Welcome: Start 6s Animation
+    App->>Storage: Check for tokens
+    
+    alt Has valid token
+        Storage-->>App: Return token
+        App->>API: Fetch User Profile
+        API-->>App: Profile Data
+        Welcome-->>App: Animation Complete
+        App->>User: Show Dashboard
+    else No token
+        Welcome-->>App: Animation Complete
+        App->>User: Show Login Screen
+    end
+```
+
+---
+
+## 4. Navigation Structure
+
+### Navigation Hierarchy
+```mermaid
+graph TD
+    A[App Entry] --> B[Welcome Screen<br/>6s Cinematic]
+    B --> C{Authenticated?}
+    C -- Yes --> D[Dashboard]
+    C -- No --> E[Login]
+    E --> F[Signup]
+    E --> G[Guest Mode]
+```
+
+---
+
+## 5. Features Implemented So Far
+
+- ✅ **Premium Welcome Sequence**: A 6-second animated intro with 3D logo effects.
+- ✅ **Dynamic Theme System**: Real-time switching between modes.
+- ✅ **Secure Auth Wrapper**: Integrated with Django JWT.
+- ✅ **Guest Mode**: Exploration without account creation.
+- ✅ **Dashboard UI**: Overview stats and job application cards.
+- ✅ **Smart Redirection**: Auto-detects login state during the welcome animation.
+
+---
+
+## 6. Development Roadmap
+
+```mermaid
+gantt
+    title Mobile App Development Timeline
+    dateFormat  YYYY-MM-DD
+    section Completed
+    Project Setup & Core Logic :2026-02-01, 7d
+    Branding & Theme Engine    :2026-02-08, 2d
+    Welcome Sequence           :2026-02-09, 1d
+    section Upcoming
+    Tab Navigation             :2026-02-10, 3d
+    Application CRUD           :2026-02-13, 7d
+    Push Notifications         :2026-02-20, 5d
+    Google OAuth               :2026-02-25, 4d
+```
+
+---
+> This report documents the mobile evolution of the JobTracker platform, showcasing advanced React Native development techniques and premium UI execution.
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup Markdown
+            const raw = document.getElementById('markdown-raw').innerHTML;
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = marked.parse(raw);
+            
+            // Convert Mermaid code blocks to div.mermaid
+            const codeBlocks = contentDiv.querySelectorAll('code.language-mermaid');
+            codeBlocks.forEach(block => {
+                const pre = block.parentElement;
+                const div = document.createElement('div');
+                div.className = 'mermaid';
+                div.textContent = block.textContent;
+                pre.parentElement.replaceChild(div, pre);
+            });
+            
+            // Initialize Mermaid with custom settings
+            mermaid.initialize({ 
+                startOnLoad: true, 
+                theme: 'neutral',
+                fontFamily: 'Inter',
+                sequence: {
+                    showSequenceNumbers: true,
+                    useMaxWidth: true
+                },
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            });
+            
+            // Re-render Mermaid diagrams
+            mermaid.run();
+        });
+    </script>
+</body>
+</html>

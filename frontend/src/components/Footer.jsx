@@ -1,4 +1,4 @@
-import { Briefcase } from "lucide-react";
+import Logo from "./Logo";
 
 const Footer = () => {
   return (
@@ -7,9 +7,8 @@ const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 mb-12">
           {/* Brand Section */}
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex items-center gap-2 mb-4">
-              <Briefcase className="text-blue-500" size={28} />
-              <span className="text-white font-bold text-xl tracking-tight">Job Tracker</span>
+            <div className="mb-4">
+              <Logo size="md" variant="gradient" />
             </div>
             <p className="text-sm leading-relaxed max-w-xs">
               The smart way to manage your job search and land your dream role.

@@ -1,6 +1,7 @@
-import { Briefcase, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import authBg from "../assets/auth-bg.png";
+import Logo from "./Logo";
 
 const AuthLayout = ({ children, title, subtitle }) => {
   return (
@@ -19,13 +20,8 @@ const AuthLayout = ({ children, title, subtitle }) => {
 
         {/* Content Overlays */}
         <div className="relative z-10">
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/30 group-hover:bg-white/30 transition-all">
-              <Briefcase className="text-white" size={28} />
-            </div>
-            <span className="text-2xl font-bold tracking-tight text-white">
-              Job Tracker
-            </span>
+          <Link to="/">
+            <Logo size="lg" variant="white" />
           </Link>
         </div>
 
@@ -63,13 +59,8 @@ const AuthLayout = ({ children, title, subtitle }) => {
       <div className="w-full lg:w-1/2 flex flex-col justify-center px-4 sm:px-12 lg:px-20 py-12 bg-gray-50/50">
         <div className="max-w-md w-full mx-auto space-y-8">
           <div className="lg:hidden flex justify-center mb-8">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-                <Briefcase className="text-white" size={24} />
-              </div>
-              <span className="text-xl font-bold text-gray-900">
-                Job Tracker
-              </span>
+            <Link to="/">
+              <Logo size="md" variant="gradient" className="text-gray-900" />
             </Link>
           </div>
 
