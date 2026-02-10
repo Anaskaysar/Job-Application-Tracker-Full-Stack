@@ -9,6 +9,7 @@ import {
     SearchControls,
     StatsSection
 } from '../../components/dashcomp';
+import ProfileSection from '../../components/dashcomp/ProfileSection';
 import ReviewForm from '../../components/dashcomp/ReviewForm';
 import { useAuth } from '../../context/AuthContext';
 import { sampleApplications } from './sampleData';
@@ -86,6 +87,7 @@ const DashBoard = ({ isDemo = false }) => {
         setSearchQuery={setSearchQuery}
         user={user}
         logout={logout}
+        setActiveView={setActiveView}
       />
 
       {/* Demo Mode Banner */}
@@ -96,41 +98,50 @@ const DashBoard = ({ isDemo = false }) => {
         </div>
       )}
 
-      {/* Stats Section */}
-      <StatsSection
-        statuses={statuses}
-        filteredApplications={filteredApplications}
-        setShowAddModal={setShowAddModal}
-      />
+      {/* Stats Section - Hidden in Profile View */}
+      {activeView !== 'profile' && (
+        <StatsSection
+          statuses={statuses}
+          filteredApplications={filteredApplications}
+          setShowAddModal={setShowAddModal}
+        />
+      )}
 
       {/* Main Content */}
       <div className={`${activeView === 'board' ? 'max-w-full lg:px-12' : 'max-w-7xl'} mx-auto px-4 sm:px-6 py-6 pb-24`}>
-        <SearchControls
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          activeView={activeView}
-          setActiveView={setActiveView}
-        />
+        {activeView !== 'profile' && (
+          <SearchControls
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            activeView={activeView}
+            setActiveView={setActiveView}
+          />
+        )}
 
         {loading ? (
           <div className="flex items-center justify-center h-64">
              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
           </div>
         ) : (
-          activeView === 'board' ? (
-            <BoardView
-              statuses={statuses}
-              filteredApplications={filteredApplications}
-              setSelectedApp={setSelectedApp}
-              getStatusColor={getStatusColor}
-            />
-          ) : (
-            <ListView
-              filteredApplications={filteredApplications}
-              setSelectedApp={setSelectedApp}
-              getStatusColor={getStatusColor}
-            />
-          )
+          (() => {
+            if (activeView === 'profile') {
+              return <ProfileSection user={user} onBack={() => setActiveView('board')} />;
+            }
+            return activeView === 'board' ? (
+              <BoardView
+                statuses={statuses}
+                filteredApplications={filteredApplications}
+                setSelectedApp={setSelectedApp}
+                getStatusColor={getStatusColor}
+              />
+            ) : (
+              <ListView
+                filteredApplications={filteredApplications}
+                setSelectedApp={setSelectedApp}
+                getStatusColor={getStatusColor}
+              />
+            );
+          })()
         )}
       </div>
 

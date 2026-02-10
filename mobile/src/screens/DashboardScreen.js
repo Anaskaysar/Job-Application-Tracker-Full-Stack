@@ -7,11 +7,13 @@ import {
     Moon,
     Plus,
     Sun,
+    User,
     XCircle
 } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import {
     Dimensions,
+    Modal,
     ScrollView,
     StatusBar,
     StyleSheet,
@@ -21,6 +23,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../api/axios';
+import ProfileContent from '../components/ProfileContent';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
@@ -31,6 +34,7 @@ const DashboardScreen = ({ navigation }) => {
     const { theme, isDarkMode, toggleTheme } = useTheme();
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [showProfileModal, setShowProfileModal] = useState(false);
 
     const fetchApplications = async () => {
         if (!user) {
@@ -124,6 +128,12 @@ const DashboardScreen = ({ navigation }) => {
                     <TouchableOpacity style={[styles.iconButton, { backgroundColor: theme.card, borderColor: theme.border }]} onPress={toggleTheme}>
                         {isDarkMode ? <Sun color="#F59E0B" size={22} /> : <Moon color="#64748B" size={22} />}
                     </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.iconButton, { backgroundColor: theme.card, borderColor: theme.border }]}
+                        onPress={() => setShowProfileModal(true)}
+                    >
+                        <User color={theme.textSecondary} size={22} />
+                    </TouchableOpacity>
                     <TouchableOpacity style={[styles.iconButton, { backgroundColor: theme.card, borderColor: theme.border }]}>
                         <Bell color={theme.textSecondary} size={22} />
                     </TouchableOpacity>
@@ -185,6 +195,18 @@ const DashboardScreen = ({ navigation }) => {
                     <Plus color="#fff" size={32} />
                 </LinearGradient>
             </TouchableOpacity>
+
+            {/* Profile Modal */}
+            <Modal
+                visible={showProfileModal}
+                animationType="slide"
+                transparent={false}
+                onRequestClose={() => setShowProfileModal(false)}
+            >
+                <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
+                    <ProfileContent onClose={() => setShowProfileModal(false)} />
+                </SafeAreaView>
+            </Modal>
         </SafeAreaView>
     );
 };

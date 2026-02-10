@@ -97,13 +97,15 @@ const WelcomeScreen = ({ navigation }) => {
         const translateY = interpolate(floatValue.value, [0, 1], [0, -20]);
         const rotateX = interpolate(tiltX.value, [0, 1], [-10, 10]);
         const rotateY = interpolate(tiltY.value, [0, 1], [-15, 15]);
+        const scale = interpolate(floatValue.value, [0, 1], [1, 1.05]);
 
         return {
             transform: [
-                { translateY },
                 { perspective: 1000 },
+                { translateY },
                 { rotateX: `${rotateX}deg` },
                 { rotateY: `${rotateY}deg` },
+                { scale },
             ],
         };
     });

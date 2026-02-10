@@ -10,7 +10,8 @@ const DashboardHeader = ({
   searchQuery, 
   setSearchQuery, 
   user, 
-  logout 
+  logout,
+  setActiveView 
 }) => {
   const navigate = useNavigate();
 
@@ -68,7 +69,13 @@ const DashboardHeader = ({
                      {!isDemo && user && <p className="text-xs text-gray-500 truncate">{user.email}</p>}
                   </div>
                   
-                  <button className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                  <button 
+                    onClick={() => {
+                      setActiveView('profile');
+                      setIsProfileOpen(false);
+                    }}
+                    className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                  >
                     <User size={16} className="text-gray-400" /> Profile Settings
                   </button>
                   <button className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">

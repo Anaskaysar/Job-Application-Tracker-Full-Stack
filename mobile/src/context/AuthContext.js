@@ -62,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
-    const register = async (username, email, password) => {
+    const register = async (username, email, password, name) => {
         try {
             setLoading(true);
             setError(null);
@@ -70,7 +70,8 @@ export const AuthContextProvider = ({ children }) => {
                 username,
                 email,
                 password1: password,
-                password2: password
+                password2: password,
+                name: name // Passing the full name
             });
 
             const accessToken = response.data.access || response.data.access_token || response.data.key;

@@ -16,6 +16,19 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ['user']
 
+from dj_rest_auth.registration.serializers import RegisterSerializer
+from django.db import transaction
+
+class CustomRegisterSerializer(RegisterSerializer):
+    name = serializers.CharField(required=False, allow_blank=True)
+
+    @transaction.atomic
+    def save(self, request):
+        user = super().save(request)
+        user.first_name = self.validated_data.get('name', '')
+        user.save()
+        return user
+
 class ReviewSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)
     display_name = serializers.CharField(source='user.first_name', read_only=True)

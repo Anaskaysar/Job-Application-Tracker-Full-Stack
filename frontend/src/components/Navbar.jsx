@@ -1,4 +1,4 @@
-import { ChevronDown, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
+import { ChevronDown, Heart, LayoutGrid, LogOut, Menu, User, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -42,6 +42,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "Testimonials", href: "#testimonials" },
+    { name: "Support", href: "/support", isLink: true },
   ];
 
   // Helper: Get Initials (e.g., "John Doe" -> "JD")
@@ -56,7 +57,8 @@ const Navbar = () => {
 
   const displayName = user?.display_name || user?.first_name || user?.username || "Account";
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e, href, isLink) => {
+    if (isLink) return; // Let Link component handle it
     e.preventDefault();
     if (location.pathname !== "/") {
       navigate("/" + href);
@@ -94,14 +96,24 @@ const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
-              >
-                {link.name}
-              </a>
+              link.isLink ? (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
+                >
+                  {link.name}
+                </a>
+              )
             ))}
             <div className="flex items-center gap-4 ml-4">
               {user ? (
@@ -127,9 +139,20 @@ const Navbar = () => {
                       <Link to="/dashboard" className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                         <LayoutGrid size={16} /> Dashboard
                       </Link>
-                      <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                      <Link 
+                        to="/dashboard" 
+                        onClick={() => setIsProfileOpen(false)}
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      >
                         <User size={16} /> Profile
-                      </button>
+                      </Link>
+                      <Link 
+                        to="/support" 
+                        onClick={() => setIsProfileOpen(false)}
+                        className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      >
+                        <Heart size={16} /> Support Us
+                      </Link>
                       <hr className="my-1 border-gray-50" />
                       <button 
                         onClick={() => {
@@ -182,14 +205,25 @@ const Navbar = () => {
       >
         <div className="px-4 pt-2 pb-6 space-y-2">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-3 py-3 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
-            >
-              {link.name}
-            </a>
+            link.isLink ? (
+              <Link
+                key={link.name}
+                to={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-3 py-3 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="block px-3 py-3 text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+              >
+                {link.name}
+              </a>
+            )
           ))}
           <div className="pt-4 flex flex-col gap-3 px-3">
             {user ? (
@@ -211,6 +245,15 @@ const Navbar = () => {
                   className="w-full py-3 text-base font-semibold text-gray-700 text-center hover:bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center gap-2"
                 >
                   <LayoutGrid size={18} /> Dashboard
+                </button>
+                <button
+                  onClick={() => {
+                    navigate("/support");
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full py-3 text-base font-semibold text-gray-700 text-center hover:bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-center gap-2"
+                >
+                  <Heart size={18} /> Support
                 </button>
                 <button
                   onClick={() => {

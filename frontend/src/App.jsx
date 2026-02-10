@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SignupPage from "./pages/SignupPage";
+import SupportPage from "./pages/SupportPage";
 
 // A simple PrivateRoute component to protect the dashboard
 
@@ -48,6 +49,7 @@ const AppContent = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/support" element={<SupportPage />} />
         <Route path="/demo" element={<DashBoard isDemo={true} />} />
         {/* Fallback */}
         <Route path="*" element={<NotFoundPage />} />
