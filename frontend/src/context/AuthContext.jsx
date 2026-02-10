@@ -130,14 +130,44 @@ export const AuthContextProvider = ({ children }) => {
                 access_token: googleAccessToken
             });
 
-            const { access, refresh, user: userData } = response.data;
-            localStorage.setItem("access_token", access);
-            localStorage.setItem("refresh_token", refresh);
+            console.log("Google Login Response Data:", response.data);
 
-            setUser(userData);
-            setLoading(false);
+            // Robust token extraction (JWT or Standard Token)
+            const accessToken = response.data.access || response.data.access_token || response.data.key;
+            const refreshToken = response.data.refresh || response.data.refresh_token;
+            let userData = response.data.user;
+
+            if (accessToken) {
+                localStorage.setItem("access_token", accessToken);
+                if (refreshToken) localStorage.setItem("refresh_token", refreshToken);
+
+                // If user data is missing in the response, fetch it manually
+                if (!userData) {
+                    try {
+                        console.log("Fetching profile for Google user...");
+                        const userRes = await api.get("/api/auth/user/");
+                        userData = userRes.data;
+                    } catch (e) {
+                        console.error("Manual profile fetch failed for Google user", e);
+                        // CRITICAL: If we can't get a profile, we don't have a valid session
+                        localStorage.removeItem("access_token");
+                        localStorage.removeItem("refresh_token");
+                        setError("Could not retrieve user profile.");
+                        setLoading(false);
+                        throw e;
+                    }
+                }
+                
+                setUser(userData);
+                setLoading(false); // Set loading false ONLY after user is set
+            } else {
+                console.warn("No token found in Google login response");
+                setLoading(false);
+            }
+
             return response.data;
         } catch (error) {
+            console.error("Google Auth failed internally", error);
             setError("Google login failed. Please try again.");
             setLoading(false);
             throw error;
@@ -146,13 +176,16 @@ export const AuthContextProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            await api.post("/api/auth/logout/");
-        } catch (err) {
-            console.error("Logout error", err);
-        } finally {
+            // Clear local state IMMEDIATELY to prevent racing API calls (like /api/reviews/)
+            // from using an about-to-be-invalidated token.
             setUser(null);
             localStorage.removeItem("access_token");
             localStorage.removeItem("refresh_token");
+
+            // Then notify server
+            await api.post("/api/auth/logout/");
+        } catch (err) {
+            console.error("Logout error (clean up anyway)", err);
         }
     };
 

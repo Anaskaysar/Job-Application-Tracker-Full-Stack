@@ -40,12 +40,13 @@ const DashBoard = ({ isDemo = false }) => {
   const displayName = user?.display_name || user?.first_name || user?.username || (isDemo ? "Demo User" : "Account");
 
   useEffect(() => {
-    if (!isDemo) {
+    if (!isDemo && user) {
       fetchApplications();
     }
-  }, [isDemo]);
+  }, [isDemo, user]);
 
   const fetchApplications = async () => {
+    if (!user && !isDemo) return;
     try {
       setLoading(true);
       const response = await api.get('/api/applications/');

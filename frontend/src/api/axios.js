@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
         // Using startsWith in case of full URLs or params
         const isAuthRequest = authEndpoints.some(endpoint => config.url.startsWith(endpoint) || config.url.includes(endpoint));
 
-        if (token && !isAuthRequest) {
+        if (token && token !== "undefined" && token !== "null" && !isAuthRequest) {
             // Smartly detect if it's a JWT (long) or a standard Token (short)
             const prefix = token.length > 50 ? "Bearer" : "Token";
             config.headers.Authorization = `${prefix} ${token}`;
