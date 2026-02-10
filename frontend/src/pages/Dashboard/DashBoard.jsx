@@ -110,12 +110,15 @@ const DashBoard = ({ isDemo = false }) => {
       {/* Main Content */}
       <div className={`${activeView === 'board' ? 'max-w-full lg:px-12' : 'max-w-7xl'} mx-auto px-4 sm:px-6 py-6 pb-24`}>
         {activeView !== 'profile' && (
-          <SearchControls
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            activeView={activeView}
-            setActiveView={setActiveView}
-          />
+          <>
+            <SearchControls
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              activeView={activeView}
+              setActiveView={setActiveView}
+            />
+            <EmailVerificationBanner user={user} />
+          </>
         )}
 
         {loading ? (

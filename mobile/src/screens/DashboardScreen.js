@@ -35,6 +35,22 @@ const DashboardScreen = ({ navigation }) => {
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showProfileModal, setShowProfileModal] = useState(false);
+    const [sendingVerification, setSendingVerification] = useState(false);
+    const [verificationSent, setVerificationSent] = useState(false);
+    const [dismissedBanner, setDismissedBanner] = useState(false);
+
+    const handleResendVerification = async () => {
+        try {
+            setSendingVerification(true);
+            await api.post("/api/auth/registration/resend-email/");
+            setVerificationSent(true);
+            setTimeout(() => setVerificationSent(false), 5000);
+        } catch (error) {
+            console.error("Failed to resend verification email", error);
+        } finally {
+            setSendingVerification(false);
+        }
+    };
 
     const fetchApplications = async () => {
         if (!user) {
@@ -147,6 +163,39 @@ const DashboardScreen = ({ navigation }) => {
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+                {/* Email Verification Banner */}
+                {user && !user.email_verified && !dismissedBanner && (
+                    <View style={[styles.bannerContainer, { backgroundColor: '#EFF6FF', borderColor: '#BFDBFE' }]}>
+                        <TouchableOpacity
+                            style={styles.closeBannerButton}
+                            onPress={() => setDismissedBanner(true)}
+                            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                        >
+                            <X size={16} color="#94A3B8" />
+                        </TouchableOpacity>
+
+                        <View style={styles.bannerContent}>
+                            <View style={[styles.bannerIconContainer, { backgroundColor: '#DBEAFE' }]}>
+                                <Mail size={20} color="#2563EB" />
+                            </View>
+                            <View style={styles.bannerTextContainer}>
+                                <Text style={[styles.bannerTitle, { color: '#1E3A8A' }]}>Verify your email address</Text>
+                                <Text style={[styles.bannerDescription, { color: '#475569' }]}>
+                                    We sent a link to <Text style={{ fontWeight: 'bold' }}>{user.email}</Text>. Please check your inbox.
+                                </Text>
+                                <TouchableOpacity
+                                    onPress={handleResendVerification}
+                                    disabled={sendingVerification || verificationSent}
+                                    style={{ marginTop: 8 }}
+                                >
+                                    <Text style={[styles.resendLink, { color: sendingVerification || verificationSent ? '#94A3B8' : '#2563EB' }]}>
+                                        {verificationSent ? "✓ Email sent!" : sendingVerification ? "Sending..." : "Resend verification email"}
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                )}
                 {/* Stats Grid */}
                 <View style={styles.section}>
                     <Text style={[styles.sectionTitle, { color: theme.text }]}>Overview</Text>
@@ -376,6 +425,51 @@ const styles = StyleSheet.create({
         borderRadius: 32,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    bannerContainer: {
+        marginHorizontal: 24,
+        marginTop: 16,
+        borderWidth: 1,
+        borderRadius: 16,
+        padding: 16,
+        position: 'relative',
+    },
+    closeBannerButton: {
+        position: 'absolute',
+        top: 12,
+        right: 12,
+        zIndex: 10,
+        padding: 4,
+    },
+    bannerContent: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        paddingRight: 20,
+    },
+    bannerIconContainer: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 12,
+    },
+    bannerTextContainer: {
+        flex: 1,
+    },
+    bannerTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 4,
+    },
+    bannerDescription: {
+        fontSize: 12,
+        lineHeight: 18,
+        marginBottom: 8,
+    },
+    resendLink: {
+        fontSize: 12,
+        fontWeight: 'bold',
     },
 });
 

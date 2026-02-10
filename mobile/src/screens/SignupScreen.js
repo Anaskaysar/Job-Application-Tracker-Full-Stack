@@ -10,7 +10,6 @@ const SignupScreen = ({ navigation }) => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isRegistered, setIsRegistered] = useState(false);
     const { register, loading, error } = useAuth();
     const { theme, isDarkMode } = useTheme();
 
@@ -18,7 +17,7 @@ const SignupScreen = ({ navigation }) => {
         try {
             // Updated register to include name
             await register(username, email, password, name);
-            setIsRegistered(true);
+            // Navigation handled by Auth state change
         } catch (err) { }
     };
 
@@ -36,122 +35,95 @@ const SignupScreen = ({ navigation }) => {
                     <View style={[styles.logoCircleSmall, { backgroundColor: isDarkMode ? '#4F46E520' : '#2563EB10', marginBottom: 16 }]}>
                         <Briefcase color={theme.primary} size={32} />
                     </View>
-                    <Text style={[styles.title, { color: theme.text }]}>
-                        {isRegistered ? 'Verify Email' : 'Create Account'}
-                    </Text>
-                    <Text style={[styles.subtitle, { color: theme.textSecondary }]}>
-                        {isRegistered ? 'We sent a link to your email' : 'Join us and track your career growth'}
-                    </Text>
+                    <Text style={[styles.title, { color: theme.text }]}>Create Account</Text>
+                    <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Join us and track your career growth</Text>
                 </View>
 
-                {isRegistered ? (
-                    <View style={styles.successContainer}>
-                        <View style={styles.successIconCircle}>
-                            <Mail color={theme.primary} size={48} />
+                <View style={styles.form}>
+                    {/* ... Existing Form ... */}
+                    {error && <Text style={styles.errorText}>{error}</Text>}
+
+                    <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
+                        <View style={styles.iconContainer}>
+                            <User color={theme.textSecondary} size={20} />
                         </View>
-                        <Text style={[styles.successText, { color: theme.text }]}>
-                            Please check <Text style={{ fontWeight: 'bold' }}>{email}</Text> and follow the link to verify your account.
-                        </Text>
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={() => navigation.navigate('Login')}
+                        <TextInput
+                            style={[styles.input, { color: theme.text }]}
+                            placeholder="Full Name"
+                            value={name}
+                            onChangeText={setName}
+                            placeholderTextColor={theme.textSecondary}
+                        />
+                    </View>
+
+                    <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
+                        <View style={styles.iconContainer}>
+                            <Text style={{ color: theme.textSecondary, fontWeight: 'bold', fontSize: 18 }}>@</Text>
+                        </View>
+                        <TextInput
+                            style={[styles.input, { color: theme.text }]}
+                            placeholder="Username"
+                            value={username}
+                            onChangeText={setUsername}
+                            placeholderTextColor={theme.textSecondary}
+                        />
+                    </View>
+
+                    <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
+                        <View style={styles.iconContainer}>
+                            <Mail color={theme.textSecondary} size={20} />
+                        </View>
+                        <TextInput
+                            style={[styles.input, { color: theme.text }]}
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={setEmail}
+                            autoCapitalize="none"
+                            keyboardType="email-address"
+                            placeholderTextColor={theme.textSecondary}
+                        />
+                    </View>
+
+                    <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
+                        <View style={styles.iconContainer}>
+                            <Lock color={theme.textSecondary} size={20} />
+                        </View>
+                        <TextInput
+                            style={[styles.input, { color: theme.text }]}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                            placeholderTextColor={theme.textSecondary}
+                        />
+                    </View>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={handleSignup}
+                        disabled={loading}
+                    >
+                        <LinearGradient
+                            colors={isDarkMode ? ['#4F46E5', '#8B5CF6'] : ['#2563EB', '#7C3AED']}
+                            start={{ x: 0, y: 0 }}
+                            end={{ x: 1, y: 0 }}
+                            style={styles.gradient}
                         >
-                            <LinearGradient
-                                colors={isDarkMode ? ['#4F46E5', '#8B5CF6'] : ['#2563EB', '#7C3AED']}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                                style={styles.gradient}
-                            >
-                                <Text style={styles.buttonText}>Go to Login</Text>
-                            </LinearGradient>
+                            {loading ? (
+                                <ActivityIndicator color="#fff" />
+                            ) : (
+                                <Text style={styles.buttonText}>Sign Up</Text>
+                            )}
+                        </LinearGradient>
+                    </TouchableOpacity>
+
+                    <View style={styles.footer}>
+                        <Text style={[styles.footerText, { color: theme.textSecondary }]}>Already have an account? </Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                            <Text style={[styles.footerLink, { color: theme.primary }]}>Login</Text>
                         </TouchableOpacity>
                     </View>
-                ) : (
-                    <View style={styles.form}>
-                        {/* ... Existing Form ... */}
-                        {error && <Text style={styles.errorText}>{error}</Text>}
-
-                        <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
-                            <View style={styles.iconContainer}>
-                                <User color={theme.textSecondary} size={20} />
-                            </View>
-                            <TextInput
-                                style={[styles.input, { color: theme.text }]}
-                                placeholder="Full Name"
-                                value={name}
-                                onChangeText={setName}
-                                placeholderTextColor={theme.textSecondary}
-                            />
-                        </View>
-
-                        <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
-                            <View style={styles.iconContainer}>
-                                <Text style={{ color: theme.textSecondary, fontWeight: 'bold', fontSize: 18 }}>@</Text>
-                            </View>
-                            <TextInput
-                                style={[styles.input, { color: theme.text }]}
-                                placeholder="Username"
-                                value={username}
-                                onChangeText={setUsername}
-                                placeholderTextColor={theme.textSecondary}
-                            />
-                        </View>
-
-                        <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
-                            <View style={styles.iconContainer}>
-                                <Mail color={theme.textSecondary} size={20} />
-                            </View>
-                            <TextInput
-                                style={[styles.input, { color: theme.text }]}
-                                placeholder="Email"
-                                value={email}
-                                onChangeText={setEmail}
-                                autoCapitalize="none"
-                                keyboardType="email-address"
-                                placeholderTextColor={theme.textSecondary}
-                            />
-                        </View>
-
-                        <View style={[styles.inputWrapper, { backgroundColor: theme.input, borderColor: theme.border }]}>
-                            <View style={styles.iconContainer}>
-                                <Lock color={theme.textSecondary} size={20} />
-                            </View>
-                            <TextInput
-                                style={[styles.input, { color: theme.text }]}
-                                placeholder="Password"
-                                value={password}
-                                onChangeText={setPassword}
-                                secureTextEntry
-                                placeholderTextColor={theme.textSecondary}
-                            />
-                        </View>
-
-                        <TouchableOpacity
-                            style={styles.button}
-                            onPress={handleSignup}
-                            disabled={loading}
-                        >
-                            <LinearGradient
-                                colors={isDarkMode ? ['#4F46E5', '#8B5CF6'] : ['#2563EB', '#7C3AED']}
-                                start={{ x: 0, y: 0 }}
-                                end={{ x: 1, y: 0 }}
-                                style={styles.gradient}
-                            >
-                                {loading ? (
-                                    <ActivityIndicator color="#fff" />
-                                ) : (
-                                    <Text style={styles.buttonText}>Sign Up</Text>
-                                )}
-                            </LinearGradient>
-                        </TouchableOpacity>
-
-                        <View style={styles.footer}>
-                            <Text style={[styles.footerText, { color: theme.textSecondary }]}>Already have an account? </Text>
-                            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                                <Text style={[styles.footerLink, { color: theme.primary }]}>Login</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                </View>
             </ScrollView>
         </KeyboardAvoidingView>
     );
@@ -259,26 +231,6 @@ const styles = StyleSheet.create({
     footerLink: {
         fontSize: 14,
         fontWeight: 'bold',
-    },
-    successContainer: {
-        alignItems: 'center',
-        paddingVertical: 20,
-    },
-    successIconCircle: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        backgroundColor: '#F0F9FF',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 24,
-    },
-    successText: {
-        fontSize: 16,
-        textAlign: 'center',
-        lineHeight: 24,
-        marginBottom: 32,
-        paddingHorizontal: 20,
     },
 });
 
