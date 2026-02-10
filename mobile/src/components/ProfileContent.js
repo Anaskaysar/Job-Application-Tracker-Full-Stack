@@ -18,12 +18,14 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
 const ProfileContent = ({ onClose }) => {
     const { user, logout } = useAuth();
     const { theme, isDarkMode } = useTheme();
+    const insets = useSafeAreaInsets();
 
     const handleDonation = () => {
         Linking.openURL('https://ko-fi.com/anaskaysar');
@@ -35,7 +37,7 @@ const ProfileContent = ({ onClose }) => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, paddingTop: insets.top }}>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
             <View style={styles.header}>
