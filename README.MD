@@ -1,13 +1,19 @@
 # Job Application Tracker (Full Stack)
 
-A professional job application tracking system designed to help users organize their job search. This project features a secure Django REST backend and a modern React frontend.
+A professional job application tracking system designed to help users organize their job search. This project features a secure Django REST backend and a modern React frontend with a companion mobile app.
+
+## 🔗 Live Production Links
+- **Web App**: [https://jobtracker.kaysarulanas.me](https://jobtracker.kaysarulanas.me)
+- **API (Admin)**: [https://api.jobtracker.kaysarulanas.me/admin/](https://api.jobtracker.kaysarulanas.me/admin/)
+- **Documentation**: [Full-Stack Strategy & Architecture](docs/STRATEGY.md)
 
 ## 🚀 Features
-- **Secure Authentication**: JWT-based login and registration.
-- **Job Tracking**: Manage company names, positions, status, and application dates.
-- **One-to-Many File Support**: Attach multiple resumes, cover letters, or portfolios to a single application.
-- **Enhanced Details**: Track job post URLs and save job descriptions for interview preparation.
-- **User Ownership**: Secure data isolation; users only see and manage their own applications.
+- **Secure Authentication**: JWT-based login and registration (Google OAuth supported).
+- **Job Tracking**: Manage company names, positions, stages, and application dates.
+- **One-to-Many File Support**: Attach multiple resumes, portfolios, or cover letters.
+- **Enhanced Details**: Save job descriptions for interview prep.
+- **User Ownership**: Secure data isolation; users only manage their own data.
+
 
 ## 🛠️ Tech Stack
 ### Backend

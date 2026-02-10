@@ -51,11 +51,11 @@ Create `/etc/nginx/sites-available/jobtracker`:
 ```nginx
 server {
     listen 80;
-    server_name api.yourdomain.com;
+    server_name api.jobtracker.kaysarulanas.me;
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        root /home/ubuntu/JobApp/backend;
+        alias /home/ubuntu/Job-Application-Tracker-Full-Stack/backend/staticfiles/;
     }
 
     location / {
@@ -68,5 +68,18 @@ server {
 ## 7. SSL (Certbot)
 ```bash
 sudo apt install python3-certbot-nginx
-sudo certbot --nginx -d api.yourdomain.com
+sudo certbot --nginx -d api.jobtracker.kaysarulanas.me
 ```
+
+## 8. Google OAuth Setup
+- **Authorized JavaScript Origins**: Add `https://jobtracker.kaysarulanas.me`.
+- **Authorized Redirect URIs**: Add `https://jobtracker.kaysarulanas.me` and `https://api.jobtracker.kaysarulanas.me`.
+- **Environment Variable**: Ensure `GOOGLE_CLIENT_SECRET=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` and `GOOGLE_CALLBACK_URL=https://jobtracker.kaysarulanas.me` are set in your EC2 `.env` file.
+
+## 🔄 How to Update the Backend
+1. **Push** local changes to GitHub.
+2. **SSH** into EC2.
+3. **Pull** latest code: `git pull origin main`.
+4. **Restart** services: `sudo systemctl restart gunicorn`.
+5. **Migrate** if needed: `python manage.py migrate`.
+

@@ -4,6 +4,13 @@ This directory contains comprehensive documentation for the Job Application Trac
 
 ## 📄 Files
 
+### `STRATEGY.md`
+Production deployment strategy and component architecture:
+- Live Deployment URLs
+- System Architecture Diagram
+- Mobile-as-Companion Strategy
+- Project Roadmap
+
 ### `project_report.md`
 Comprehensive project report documenting the entire system:
 - Problem statement and solution
