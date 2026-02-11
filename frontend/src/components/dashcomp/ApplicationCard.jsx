@@ -1,4 +1,4 @@
-import { Calendar, Edit2, FileText, Trash2 } from 'lucide-react';
+import { Calendar, Edit2, ExternalLink, FileText, Trash2 } from 'lucide-react';
 
 const ApplicationCard = ({ app, setSelectedApp, getStatusColor, onEdit, onDelete }) => {
   return (
@@ -12,6 +12,18 @@ const ApplicationCard = ({ app, setSelectedApp, getStatusColor, onEdit, onDelete
           <p className="text-sm text-gray-600">{app.position_title}</p>
         </div>
         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+          {app.job_post_url && (
+            <a 
+              href={app.job_post_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="p-1.5 hover:bg-green-50 rounded-lg text-gray-400 hover:text-green-600 transition-colors"
+              title="Open Job Post"
+            >
+              <ExternalLink size={14} />
+            </a>
+          )}
           <button 
             onClick={(e) => { e.stopPropagation(); onEdit(app); }}
             className="p-1.5 hover:bg-blue-50 rounded-lg text-gray-400 hover:text-blue-600 transition-colors"

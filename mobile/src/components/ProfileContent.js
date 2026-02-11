@@ -1,15 +1,20 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import {
     ExternalLink,
+    FileText,
+    Globe,
     Heart,
+    HelpCircle,
     Info,
     LogOut,
     Mail,
     Shield,
+    Trash2,
     User,
     XCircle
 } from 'lucide-react-native';
 import {
+    Alert,
     Linking,
     ScrollView,
     StatusBar,
@@ -23,7 +28,7 @@ import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
 const ProfileContent = ({ onClose }) => {
-    const { user, logout } = useAuth();
+    const { user, logout, deleteAccount } = useAuth();
     const { theme, isDarkMode } = useTheme();
     const insets = useSafeAreaInsets();
 
@@ -34,6 +39,28 @@ const ProfileContent = ({ onClose }) => {
     const handleLogout = async () => {
         await logout();
         if (onClose) onClose();
+    };
+
+    const handleDeleteAccount = () => {
+        Alert.alert(
+            "Delete Account",
+            "Are you absolutely sure? This action is permanent and will delete all your applications and data.",
+            [
+                { text: "Cancel", style: "cancel" },
+                {
+                    text: "Delete",
+                    style: "destructive",
+                    onPress: async () => {
+                        try {
+                            await deleteAccount();
+                            if (onClose) onClose();
+                        } catch (error) {
+                            Alert.alert("Error", "Failed to delete account. Please try again.");
+                        }
+                    }
+                }
+            ]
+        );
     };
 
     return (
@@ -64,6 +91,8 @@ const ProfileContent = ({ onClose }) => {
                     <Text style={[styles.userName, { color: theme.text }]}>{user?.username || "N/A"}</Text>
                     <Text style={[styles.userEmail, { color: theme.textSecondary }]}>{user?.email || "N/A"}</Text>
                 </View>
+
+
 
                 {/* Info Section */}
                 <View style={styles.section}>
@@ -120,10 +149,63 @@ const ProfileContent = ({ onClose }) => {
                     </TouchableOpacity>
                 </View>
 
+                {/* Legal Section */}
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>Legal</Text>
+                    <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
+                        <TouchableOpacity
+                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me/privacy')}
+                            style={styles.infoRow}
+                        >
+                            <FileText color={theme.textSecondary} size={20} />
+                            <View style={styles.infoTextContainer}>
+                                <Text style={[styles.infoValue, { color: theme.text, marginTop: 0 }]}>Privacy Policy</Text>
+                            </View>
+                            <ExternalLink size={16} color={theme.textSecondary} />
+                        </TouchableOpacity>
+
+                        <View style={[styles.divider, { backgroundColor: theme.border }]} />
+
+                        <TouchableOpacity
+                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me/terms')}
+                            style={styles.infoRow}
+                        >
+                            <FileText color={theme.textSecondary} size={20} />
+                            <View style={styles.infoTextContainer}>
+                                <Text style={[styles.infoValue, { color: theme.text, marginTop: 0 }]}>Terms of Service</Text>
+                            </View>
+                            <ExternalLink size={16} color={theme.textSecondary} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 {/* About Section */}
                 <View style={styles.section}>
                     <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>About JobTracker</Text>
                     <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
+
+                        <View style={{ flexDirection: 'row', marginBottom: 16 }}>
+                            <View style={{ width: 40, height: 40, borderRadius: 12, backgroundColor: isDarkMode ? '#1E293B' : '#F1F5F9', alignItems: 'center', justifyContent: 'center', marginRight: 12 }}>
+                                <Globe size={20} color={theme.primary} />
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <Text style={[styles.infoValue, { color: theme.text, marginBottom: 4 }]}>Sync Across Devices</Text>
+                                <Text style={{ color: theme.textSecondary, lineHeight: 20, fontSize: 13 }}>
+                                    Your data is automatically synced between this app and our website. seamlessy switch between mobile and desktop to manage your job search anywhere.
+                                </Text>
+                            </View>
+                        </View>
+
+                        <TouchableOpacity
+                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me')}
+                            style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16, paddingLeft: 52 }}
+                        >
+                            <Text style={{ color: theme.primary, fontWeight: 'bold', marginRight: 6 }}>Visit Website</Text>
+                            <ExternalLink size={14} color={theme.primary} />
+                        </TouchableOpacity>
+
+                        <View style={[styles.divider, { backgroundColor: theme.border, marginLeft: 0 }]} />
+
                         <View style={styles.infoRow}>
                             <Info color={theme.textSecondary} size={20} />
                             <View style={styles.infoTextContainer}>
@@ -134,6 +216,36 @@ const ProfileContent = ({ onClose }) => {
                     </View>
                 </View>
 
+                {/* Contact Section */}
+                <View style={styles.section}>
+                    <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>Help & Support</Text>
+                    <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
+                        <TouchableOpacity
+                            onPress={() => Linking.openURL('mailto:kaysarulanas@gmail.com')}
+                            style={styles.infoRow}
+                        >
+                            <Mail color={theme.textSecondary} size={20} />
+                            <View style={styles.infoTextContainer}>
+                                <Text style={[styles.infoValue, { color: theme.text, marginTop: 0 }]}>Email Support</Text>
+                            </View>
+                            <ExternalLink size={16} color={theme.textSecondary} />
+                        </TouchableOpacity>
+
+                        <View style={[styles.divider, { backgroundColor: theme.border }]} />
+
+                        <TouchableOpacity
+                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me/contact')}
+                            style={styles.infoRow}
+                        >
+                            <HelpCircle color={theme.textSecondary} size={20} />
+                            <View style={styles.infoTextContainer}>
+                                <Text style={[styles.infoValue, { color: theme.text, marginTop: 0 }]}>Help Center</Text>
+                            </View>
+                            <ExternalLink size={16} color={theme.textSecondary} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
                 {/* Logout Button */}
                 <TouchableOpacity
                     style={[styles.logoutButton, { borderColor: isDarkMode ? '#EF444450' : '#FEE2E2' }]}
@@ -141,6 +253,15 @@ const ProfileContent = ({ onClose }) => {
                 >
                     <LogOut color="#EF4444" size={20} />
                     <Text style={styles.logoutText}>Sign Out</Text>
+                </TouchableOpacity>
+
+                {/* Delete Account Button */}
+                <TouchableOpacity
+                    style={styles.deleteButton}
+                    onPress={handleDeleteAccount}
+                >
+                    <Trash2 color="#EF4444" size={16} />
+                    <Text style={styles.deleteText}>Delete My Account</Text>
                 </TouchableOpacity>
 
                 <View style={{ height: 40 }} />
@@ -285,6 +406,20 @@ const styles = StyleSheet.create({
         color: '#EF4444',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    deleteButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        marginTop: 16,
+        gap: 6,
+        opacity: 0.8,
+    },
+    deleteText: {
+        color: '#EF4444',
+        fontSize: 14,
+        fontWeight: '600',
     },
 });
 

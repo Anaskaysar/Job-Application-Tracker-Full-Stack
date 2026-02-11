@@ -1,4 +1,6 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
+from rest_framework.views import APIView
+from rest_framework.response import Response
 import os
 from .models import Application, ApplicationFile, Review
 from .serializers import ApplicationSerializer, ApplicationFileSerializer, ReviewSerializer
@@ -51,3 +53,11 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class DeleteAccountView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def delete(self, request):
+        user = request.user
+        user.delete()
+        return Response({"detail": "Account deleted successfully"}, status=status.HTTP_204_NO_CONTENT)

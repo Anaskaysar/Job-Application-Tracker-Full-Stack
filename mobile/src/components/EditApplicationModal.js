@@ -1,9 +1,10 @@
-import { Check, X } from 'lucide-react-native';
+import { Check, ExternalLink, X } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
     Alert,
     KeyboardAvoidingView,
+    Linking,
     Modal,
     Platform,
     ScrollView,
@@ -87,6 +88,25 @@ const EditApplicationModal = ({ visible, onClose, app, onSuccess }) => {
                             <Text style={[styles.value, { color: theme.text }]}>{app.position_title}</Text>
                         </View>
                         <View style={styles.separator} />
+
+                        {app.job_post_url ? (
+                            <>
+                                <View style={styles.infoRow}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                                        <Text style={[styles.label, { color: theme.textSecondary }]}>Job Post</Text>
+                                        <TouchableOpacity onPress={() => Linking.openURL(app.job_post_url)}>
+                                            <ExternalLink size={16} color={theme.primary} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <TouchableOpacity onPress={() => Linking.openURL(app.job_post_url)}>
+                                        <Text style={[styles.value, { color: theme.primary, textDecorationLine: 'underline' }]} numberOfLines={1}>
+                                            {app.job_post_url}
+                                        </Text>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.separator} />
+                            </>
+                        ) : null}
 
                         <Text style={[styles.sectionTitle, { color: theme.text }]}>Status</Text>
                         <View style={styles.statusContainer}>

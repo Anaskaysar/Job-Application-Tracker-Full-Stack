@@ -1,5 +1,5 @@
 
-import { Edit2, Trash2 } from 'lucide-react';
+import { Edit2, ExternalLink, Trash2 } from 'lucide-react';
 
 const ListView = ({ filteredApplications, setSelectedApp, getStatusColor, onEdit, onDelete }) => {
   return (
@@ -9,6 +9,7 @@ const ListView = ({ filteredApplications, setSelectedApp, getStatusColor, onEdit
           <tr>
             <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Company</th>
             <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Position</th>
+            <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">URL</th>
             <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
             <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider">Applied</th>
             <th className="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-wider text-right">Actions</th>
@@ -21,6 +22,22 @@ const ListView = ({ filteredApplications, setSelectedApp, getStatusColor, onEdit
                 <div className="font-bold text-gray-900">{app.company_name}</div>
               </td>
               <td className="px-6 py-4 text-sm text-gray-600">{app.position_title}</td>
+              <td className="px-6 py-4">
+                {app.job_post_url ? (
+                  <a 
+                    href={app.job_post_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="p-1.5 inline-flex items-center justify-center hover:bg-green-50 rounded-lg text-gray-400 hover:text-green-600 transition-colors"
+                    title={app.job_post_url}
+                  >
+                    <ExternalLink size={16} />
+                  </a>
+                ) : (
+                  <span className="text-gray-300">-</span>
+                )}
+              </td>
               <td className="px-6 py-4">
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded ${getStatusColor(app.status)}`}>
                   {app.status}

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include  # Added include here
 from rest_framework import routers
-from applications.views import ApplicationViewSet, ApplicationFileViewSet, ReviewViewSet
+from applications.views import ApplicationViewSet, ApplicationFileViewSet, ReviewViewSet, DeleteAccountView
 from applications.views import GoogleLogin
 
 #  JWT Authentication
@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/auth/', include('dj_rest_auth.urls')),
     path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/auth/google/', GoogleLogin.as_view(), name='google_login'),
+    path('api/auth/delete/', DeleteAccountView.as_view(), name='delete_account'),
 ]

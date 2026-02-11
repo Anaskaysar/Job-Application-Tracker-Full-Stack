@@ -1,19 +1,23 @@
+import { useFocusEffect } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import {
     Bell,
     Briefcase,
     CheckCircle2,
+    X as CloseX,
     LogOut,
+    Mail,
     Moon,
     Plus,
     Sun,
     User,
     XCircle
 } from 'lucide-react-native';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
     Dimensions,
     Modal,
+    RefreshControl,
     ScrollView,
     StatusBar,
     StyleSheet,
@@ -23,6 +27,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import api from '../api/axios';
+import MobileAdBanner from '../components/MobileAdBanner';
 import ProfileContent from '../components/ProfileContent';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -38,6 +43,7 @@ const DashboardScreen = ({ navigation }) => {
     const [sendingVerification, setSendingVerification] = useState(false);
     const [verificationSent, setVerificationSent] = useState(false);
     const [dismissedBanner, setDismissedBanner] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     const handleResendVerification = async () => {
         try {
@@ -75,9 +81,17 @@ const DashboardScreen = ({ navigation }) => {
         }
     };
 
-    useEffect(() => {
-        fetchApplications();
-    }, []);
+    const onRefresh = useCallback(async () => {
+        setRefreshing(true);
+        await fetchApplications();
+        setRefreshing(false);
+    }, [user]);
+
+    useFocusEffect(
+        useCallback(() => {
+            fetchApplications();
+        }, [user])
+    );
 
     const stats = [
         {
@@ -162,7 +176,18 @@ const DashboardScreen = ({ navigation }) => {
                 </View>
             </View>
 
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.scrollContent}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                        colors={[theme.primary]}
+                        tintColor={theme.primary}
+                    />
+                }
+            >
                 {/* Email Verification Banner */}
                 {user && !user.email_verified && !dismissedBanner && (
                     <View style={[styles.bannerContainer, { backgroundColor: '#EFF6FF', borderColor: '#BFDBFE' }]}>
@@ -171,7 +196,7 @@ const DashboardScreen = ({ navigation }) => {
                             onPress={() => setDismissedBanner(true)}
                             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                         >
-                            <X size={16} color="#94A3B8" />
+                            <CloseX size={16} color="#94A3B8" />
                         </TouchableOpacity>
 
                         <View style={styles.bannerContent}>
@@ -256,7 +281,10 @@ const DashboardScreen = ({ navigation }) => {
                     <ProfileContent onClose={() => setShowProfileModal(false)} />
                 </SafeAreaView>
             </Modal>
-        </SafeAreaView>
+
+            {/* Ad Banner */}
+            <MobileAdBanner />
+        </SafeAreaView >
     );
 };
 
@@ -409,7 +437,7 @@ const styles = StyleSheet.create({
     },
     fab: {
         position: 'absolute',
-        bottom: 30,
+        bottom: 80, // Moved up to accommodate Ad Banner (was 30)
         right: 24,
         width: 64,
         height: 64,

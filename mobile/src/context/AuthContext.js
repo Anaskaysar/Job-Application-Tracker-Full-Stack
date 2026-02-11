@@ -21,6 +21,7 @@ export const AuthContextProvider = ({ children }) => {
                 }
             } catch (error) {
                 console.error("Auth verification failed", error);
+                setUser(null);
                 await AsyncStorage.removeItem("access_token");
                 await AsyncStorage.removeItem("refresh_token");
             } finally {
@@ -152,8 +153,24 @@ export const AuthContextProvider = ({ children }) => {
         }
     };
 
+    const deleteAccount = async () => {
+        try {
+            setLoading(true);
+            await api.delete("/api/auth/delete/");
+            setUser(null);
+            await AsyncStorage.removeItem("access_token");
+            await AsyncStorage.removeItem("refresh_token");
+        } catch (error) {
+            console.error("Delete account error", error);
+            setError("Failed to delete account. Please try again.");
+            throw error;
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ user, loading, error, login, register, googleLogin, logout }}>
+        <AuthContext.Provider value={{ user, loading, error, login, register, googleLogin, logout, deleteAccount }}>
             {children}
         </AuthContext.Provider>
     );

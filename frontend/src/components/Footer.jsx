@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
 
 const Footer = () => {
@@ -43,9 +44,9 @@ const Footer = () => {
             <h4 className="text-white font-semibold mb-6 uppercase text-xs tracking-widest">Company</h4>
             <ul className="space-y-4 text-sm">
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-200">
+                <Link to="/about" className="hover:text-white transition-colors duration-200">
                   About
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-white transition-colors duration-200">
@@ -53,9 +54,9 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white transition-colors duration-200">
+                <Link to="/contact" className="hover:text-white transition-colors duration-200">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -64,15 +65,15 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1 flex flex-col items-center md:items-start mt-4 md:mt-0 pt-8 md:pt-0 border-t border-gray-800 md:border-t-0 w-full md:w-auto">
             <h4 className="text-white font-semibold mb-6 uppercase text-xs tracking-widest">Legal</h4>
             <div className="flex flex-wrap justify-center md:flex-col gap-x-8 gap-y-4 text-sm">
-              <a href="#" className="hover:text-white transition-colors duration-200">
+              <Link to="/privacy" className="hover:text-white transition-colors duration-200">
                 Privacy
-              </a>
-              <a href="#" className="hover:text-white transition-colors duration-200">
+              </Link>
+              <Link to="/terms" className="hover:text-white transition-colors duration-200">
                 Terms
-              </a>
-              <a href="#" className="hover:text-white transition-colors duration-200">
+              </Link>
+              <Link to="/security" className="hover:text-white transition-colors duration-200">
                 Security
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -81,9 +82,8 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <p>&copy; 2026 Job Tracker. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors duration-200">Twitter</a>
-            <a href="#" className="hover:text-white transition-colors duration-200">LinkedIn</a>
-            <a href="#" className="hover:text-white transition-colors duration-200">GitHub</a>
+            <a href="https://linkedin.com/in/kaysarulanas" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">LinkedIn</a>
+            <a href="https://github.com/Anaskaysar" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">GitHub</a>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { Briefcase, Lock, Mail, UserCircle2 } from 'lucide-native';
+import { Briefcase, Eye, EyeOff, Lock, Mail, UserCircle2 } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import {
     ActivityIndicator,

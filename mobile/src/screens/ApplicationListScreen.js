@@ -166,6 +166,8 @@ const ApplicationListScreen = ({ navigation }) => {
                 app={selectedApp}
                 onSuccess={handleUpdateSuccess}
             />
+            {/* Ad Banner */}
+            <MobileAdBanner />
         </SafeAreaView>
     );
 };
