@@ -1,0 +1,152 @@
+GOOGLE PLAY STORE PUBLISHING CHECKLIST
+=====================================
+
+AFTER BUILD COMPLETES:
+--------------------
+1. Download AAB file from EAS Build
+2. Go to Google Play Console → Internal Testing → Create new release
+3. Upload AAB file
+4. Add release notes
+5. Save and review release
+
+STORE LISTING REQUIREMENTS:
+--------------------------
+APP DETAILS:
+• App Name: JobTracker
+• Short Description: [80 characters max - write compelling summary]
+• Full Description: [Detailed features and benefits]
+
+VISUAL ASSETS:
+• App Icon: 512x512px PNG
+• Feature Graphic: 1024x500px PNG  
+• Screenshots: 2-7 phone-sized screenshots (required)
+• Promo images (optional)
+
+CATEGORIZATION:
+• Category: Business (or choose appropriate)
+• Tags: Add relevant tags
+
+CONTENT RATING:
+• Complete content rating questionnaire
+• Answer all questions about app content
+
+PRIVACY & LEGAL:
+• Privacy Policy URL: [Link to your privacy policy]
+• Contact Email: [Your support email]
+• Contact Website: [Your website]
+• Data Safety: Complete data safety form
+
+POLICY COMPLIANCE:
+• Ensure app follows all Google Play policies
+• Handle all permissions properly
+• Include proper user consent flows
+
+TESTING PROCESS:
+----------------
+INTERNAL TESTING:
+1. Add internal testers (email addresses)
+2. Test all app features thoroughly
+3. Test on different Android versions/devices
+4. Check for crashes and performance issues
+5. Verify Google OAuth works correctly
+6. Test backend API connections
+7. Fix any critical issues found
+
+RELEASE TRACKS:
+---------------
+OPTIONS:
+• Internal Testing → Production (direct)
+• Internal Testing → Closed Testing → Open Testing → Production
+• Internal Testing → Open Testing → Production
+
+RECOMMENDED PATH:
+1. Internal Testing (1-2 weeks)
+2. Closed Testing (1 week) 
+3. Production release
+
+PRE-RELEASE CHECKLIST:
+---------------------
+TECHNICAL:
+□ AAB file uploaded successfully
+□ App installs and launches correctly
+□ All screens work properly
+□ No crashes or major bugs
+□ Performance is acceptable
+□ Memory usage is reasonable
+□ Network requests work properly
+□ OAuth authentication flows work
+□ Offline behavior is handled
+
+CONTENT:
+□ Store listing complete
+□ Screenshots represent app accurately
+□ Description is clear and honest
+□ Privacy policy is accessible
+□ Age rating is appropriate
+□ No prohibited content
+
+BUSINESS:
+□ Monetization configured (if applicable)
+□ In-app purchases work (if applicable)
+□ Analytics implemented
+□ Crash reporting set up
+□ User feedback mechanism
+
+POST-RELEASE:
+------------
+□ Monitor crash reports
+□ Respond to user reviews
+□ Track download metrics
+□ Update app regularly
+□ Handle user support requests
+
+QUICK TEMPLATES:
+---------------
+Short Description Template:
+"Track job applications, interviews, and offers. Stay organized with your job search."
+
+Full Description Template:
+"JobTracker helps you manage your job search journey efficiently. 
+
+Features:
+• Track multiple job applications
+• Monitor interview stages
+• Store offer details and deadlines
+• Set reminders for follow-ups
+• Export data for backup
+• Clean, intuitive interface
+
+Perfect for active job seekers, career changers, and anyone managing multiple opportunities.
+
+Download JobTracker and take control of your job search today!"
+
+Privacy Policy URL Options:
+• Use a free service like privacypolicygenerator.com
+• Host on GitHub Pages
+• Use your website
+
+Contact Email Template:
+"support@jobtracker.kaysarulanas.me" (or your preferred email)
+
+COMMON ISSUES TO AVOID:
+----------------------
+□ Don't mention other app stores
+□ Don't use "best" or superlatives without proof
+□ Don't include irrelevant keywords
+□ Don't have broken links
+□ Don't forget required permissions
+□ Don't ignore policy guidelines
+
+TIMELINE ESTIMATE:
+-----------------
+• Build completion: 10-20 minutes
+• Store listing setup: 1-2 hours
+• Internal testing: 1-2 weeks
+• Review process: 1-3 days
+• Total time to production: 2-3 weeks
+
+RESOURCES:
+----------
+• Google Play Console: https://play.google.com/console
+• EAS Build documentation: https://docs.expo.dev/build/introduction/
+• Google Play policies: https://support.google.com/googleplay/android-developer/topic/9877876

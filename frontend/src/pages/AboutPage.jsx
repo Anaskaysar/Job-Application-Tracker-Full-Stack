@@ -5,10 +5,13 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Navbar />
+      <head>
+        <title>About Us - JobTrackerr!</title>
+      </head>
       <main className="flex-grow container mx-auto px-4 py-24 max-w-4xl">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">
-            About <span className="text-blue-600">JobTracker</span>
+                  About <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">JobTrackerr!</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             Our mission is to empower job seekers with the tools they need to organize, track, and land their dream jobs.
@@ -19,7 +22,7 @@ const AboutPage = () => {
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-slate-900">The Story</h2>
             <p className="text-slate-600 leading-relaxed">
-              JobTracker was born out of frustration. Spreadsheets are clunky, and generic note apps aren't specialized enough. We wanted a dedicated space where every application, interview, and offer could be tracked with precision.
+              JobTrackerr! was born out of frustration. Spreadsheets are clunky, and generic note apps aren't specialized enough. We wanted a dedicated space where every application, interview, and offer could be tracked with precision.
             </p>
             <p className="text-slate-600 leading-relaxed">
               What started as a personal tool has grown into a platform helping thousands of developers, designers, and professionals manage their career search efficiently.
@@ -40,7 +43,7 @@ const AboutPage = () => {
                     <div className="text-sm text-slate-500">Availability</div>
                 </div>
              </div>
-          </div>
+        </div>
         </div>
       </main>
       <Footer />

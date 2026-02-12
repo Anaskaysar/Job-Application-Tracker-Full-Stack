@@ -21,7 +21,7 @@ const Loader = ({ variant = "inline", size = "md", color = "blue" }) => {
       <div className="fixed inset-0 z-100 flex items-center justify-center bg-white/80 backdrop-blur-sm">
         <div className="flex flex-col items-center gap-4">
           {spinner}
-          <p className="text-gray-600 font-medium animate-pulse">Loading Job Tracker...</p>
+          <span className="text-gray-600 font-medium">JobTrackerr!</span>
         </div>
       </div>
     );

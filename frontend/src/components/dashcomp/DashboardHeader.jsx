@@ -42,7 +42,7 @@ const DashboardHeader = ({
             <div className="p-2 bg-blue-600 rounded-lg group-hover:scale-110 transition-transform">
               <Briefcase className="text-white" size={20} />
             </div>
-            <h1 className="text-xl font-black text-gray-900 tracking-tight">Job Tracker</h1>
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">JobTrackerr!</span>
             {isDemo && (
               <span className="ml-2 bg-yellow-100 text-yellow-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Demo

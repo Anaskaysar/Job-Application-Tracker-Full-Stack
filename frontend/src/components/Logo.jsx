@@ -28,8 +28,8 @@ const Logo = ({ size = "md", variant = "gradient", showText = true, className = 
         />
       </div>
       {showText && (
-        <span className={`${selectedSize.text} font-bold tracking-tight text-inherit transition-colors`}>
-          JobTracker
+        <span className={`${selectedSize.text} font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600`}>
+          JobTrackerr!
         </span>
       )}
     </div>

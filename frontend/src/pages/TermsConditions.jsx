@@ -14,7 +14,7 @@ const TermsConditions = () => {
             <section className="mb-8">
               <h2 className="text-xl font-bold text-slate-800 mb-4">1. Introduction</h2>
               <p className="text-slate-600 mb-4">
-                Welcome to JobTracker. By accessing or using our website and mobile application, you agree to be bound by these Terms and Conditions.
+                    Welcome to JobTrackerr!. By using our application, you agree to these terms. Please read them carefully.
               </p>
             </section>
 
@@ -42,7 +42,7 @@ const TermsConditions = () => {
             <section className="mb-8">
               <h2 className="text-xl font-bold text-slate-800 mb-4">5. Limitation of Liability</h2>
               <p className="text-slate-600">
-                In no event shall JobTracker, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages.
+                In no event shall JobTrackerr!, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages.
               </p>
             </section>
           </div>

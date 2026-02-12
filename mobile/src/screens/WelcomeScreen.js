@@ -159,7 +159,7 @@ const WelcomeScreen = ({ navigation }) => {
                 {/* Text Fade-in */}
                 <Animated.View style={[styles.textContainer, animatedContentStyle]}>
                     <Text style={[styles.welcomeText, { color: theme.primary }]}>WELCOME TO</Text>
-                    <Text style={[styles.title, { color: theme.text }]}>JobTracker</Text>
+                    <Text style={[styles.title, { color: theme.text }]}>JobTrackerr!</Text>
                     <Text style={[styles.tagline, { color: theme.textSecondary }]}>Your professional journey starts here</Text>
 
                     <View style={styles.loadingContainer}>

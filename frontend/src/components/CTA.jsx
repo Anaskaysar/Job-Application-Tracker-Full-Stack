@@ -8,7 +8,7 @@ const CTA = ({ onSignIn, onTryDemo }) => {
           Ready to Organize Your Job Search?
         </h2>
         <p className="text-xl text-blue-100 mb-10">
-          Join thousands of successful job seekers using Job Tracker today
+            Join thousands of professionals using JobTrackerr! to land their dream roles.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

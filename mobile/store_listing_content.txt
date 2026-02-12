@@ -1,0 +1,96 @@
+GOOGLE PLAY STORE LISTING CONTENT
+==================================
+
+APP DETAILS:
+-----------
+App Name: JobTrackerr!
+
+Short Description (80 chars max):
+A visual job search tracker to manage applications, monitor progress, and stay organized.
+
+Full Description:
+JobTrackerr! helps you manage your job search journey efficiently. 
+
+Features:
+• Track multiple job applications in one place
+• Monitor interview stages and follow-ups
+• Store offer details and important deadlines
+• Set reminders for application responses
+• Export data for backup and sharing
+• Clean, intuitive interface for easy navigation
+• Secure cloud sync across devices
+• Customizable application statuses
+
+Perfect for active job seekers, career changers, and anyone managing multiple job opportunities. Take control of your job search with JobTracker!
+
+Download now and never miss an important deadline again.
+
+SCREENSHOTS REQUIRED:
+--------------------
+SS1 - Dashboard/Home Screen: Show main dashboard with job application list, stats, and navigation
+SS2 - Add Application Form: Show the form where users add new job applications with all fields
+SS3 - Application Details: Show detailed view of a single job application with all information
+SS4 - Interview Tracking: Show interview stages or calendar view if available
+SS5 - Settings/Profile: Show user profile or settings screen
+SS6 - Search/Filter: Show search or filter functionality if available
+SS7 - Analytics/Stats: Show any statistics or analytics dashboard if available
+
+VISUAL ASSETS:
+-------------
+App Icon: 512x512px PNG (your current app icon)
+Feature Graphic: 1024x500px PNG (promotional banner for store)
+
+CATEGORIZATION:
+-------------
+Category: Business
+Tags: job search, career, application tracker, organizer, productivity
+
+CONTENT RATING:
+-------------
+Answer "No" to violence, profanity, drugs, gambling
+Answer "No" to mature content
+Answer "Yes" to user-generated content (if users can add text)
+Answer "No" to intense fantasy violence
+Answer "No" to crude humor
+Answer "No" to realistic violence
+Answer "No" to sexual content
+Answer "No" to alcohol/tobacco
+
+PRIVACY & LEGAL:
+---------------
+Privacy Policy URL: jobtrackerr.com/privacy
+Contact Email: kaysarulanasapurba@gmail.com
+Contact Website: https://jobtrackerr.com
+
+DATA SAFETY FORM:
+----------------
+Data Collection:
+• Email address (for account creation)
+• Job application data (titles, companies, dates, notes)
+• Device identifiers (for analytics)
+
+Data Usage:
+• Account management and authentication
+• Core app functionality (storing job applications)
+• Analytics and crash reporting
+• No data sold or shared with third parties
+
+Data Security:
+• Data encrypted in transit
+• Secure authentication
+• Regular security updates
+
+RELEASE NOTES:
+-------------
+Version 1.0.0:
+• Initial release
+• Track job applications and interviews
+• Set reminders and follow-ups
+• Export data functionality
+• Clean, modern interface
+• Google authentication support
+• Cross-device sync
+
+KEYWORDS FOR SEARCH:
+------------------
+job tracker, job search, career, application tracker, interview, job hunting, employment, career development, job organizer

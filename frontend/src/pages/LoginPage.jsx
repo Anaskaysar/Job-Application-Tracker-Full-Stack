@@ -38,7 +38,7 @@ const LoginPage = () => {
       title="Welcome Back"
       subtitle={
         <>
-          New to Job Tracker?{" "}
+          New to JobTrackerr!?{" "}
           <Link
             to="/signup"
             className="font-semibold text-blue-600 hover:text-blue-500 transition-colors"

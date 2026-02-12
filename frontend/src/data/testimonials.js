@@ -2,7 +2,7 @@ export const testimonialsData = [
     {
         name: "Sarah Mitchell",
         role: "Software Engineer",
-        content: "Job Tracker completely transformed my job search. I went from scattered spreadsheets to a streamlined system. Landed my dream job in 6 weeks!",
+        text: "JobTrackerr! transformed my job search. The visual status tracking and interview reminders kept me focused and organized throughout the process.",
         rating: 5,
         initials: "SM",
         color: "bg-blue-600",

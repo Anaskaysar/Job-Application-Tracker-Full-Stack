@@ -80,7 +80,7 @@ const AuthLayout = ({ children, title, subtitle }) => {
           </div>
           
           <p className="text-center text-xs text-gray-400 mt-8">
-            &copy; 2026 Job Tracker. Secure, encrypted, and private.
+            &copy; 2026 JobTrackerr!. Secure, encrypted, and private.
           </p>
         </div>
       </div>

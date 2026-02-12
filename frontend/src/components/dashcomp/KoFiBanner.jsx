@@ -25,7 +25,7 @@ const KoFiBanner = () => {
         
         <div className="flex-1">
           <h3 className="text-base font-bold text-gray-900 mb-1 flex items-center gap-2">
-            Enjoying JobTracker?
+            Enjoying JobTrackerr!?
             <Heart size={16} className="text-[#FF5E5B] fill-[#FF5E5B]" />
           </h3>
           <p className="text-sm text-gray-600 mb-3 leading-relaxed">

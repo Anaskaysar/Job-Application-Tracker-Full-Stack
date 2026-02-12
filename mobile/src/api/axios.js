@@ -1,9 +1,9 @@
-import axios from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
 
 // Base URL for API - adjust this to your backend's IP address if testing on a physical device
 // localhost doesn't work for physical devices or most emulators/simulators
-const baseURL = "https://api.jobtracker.kaysarulanas.me/"; 
+const baseURL = "https://api.jobtracker.kaysarulanas.me/";
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
         try {
             const token = await AsyncStorage.getItem('access_token');
             const authEndpoints = ['/api/auth/login/', '/api/auth/registration/', '/api/auth/google/'];
-            const isAuthRequest = authEndpoints.some(endpoint => 
+            const isAuthRequest = authEndpoints.some(endpoint =>
                 config.url.startsWith(endpoint) || config.url.includes(endpoint)
             );
 

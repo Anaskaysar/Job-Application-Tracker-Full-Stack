@@ -140,7 +140,7 @@ const ProfileContent = ({ onClose }) => {
                             <View style={styles.donationContent}>
                                 <Heart color="#fff" size={24} />
                                 <View style={{ flex: 1, marginLeft: 16 }}>
-                                    <Text style={styles.donationTitle}>Support JobTracker</Text>
+                                    <Text style={styles.donationTitle}>Support JobTrackerr!</Text>
                                     <Text style={styles.donationSubtitle}>Help keep this passion project alive and growing.</Text>
                                 </View>
                                 <ExternalLink color="#fff" size={20} />
@@ -181,7 +181,7 @@ const ProfileContent = ({ onClose }) => {
 
                 {/* About Section */}
                 <View style={styles.section}>
-                    <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>About JobTracker</Text>
+                    <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>About JobTrackerr!</Text>
                     <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
 
                         <View style={{ flexDirection: 'row', marginBottom: 16 }}>

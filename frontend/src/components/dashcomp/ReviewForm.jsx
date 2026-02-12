@@ -96,7 +96,7 @@ const ReviewForm = ({ onSuccess }) => {
           onChange={(e) => setComment(e.target.value)}
           required
           rows={4}
-          placeholder="Tell us about your experience with Job Tracker..."
+          placeholder="Tell us about your experience with JobTrackerr!..."
           className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
         />
       </div>

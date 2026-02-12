@@ -50,7 +50,7 @@ const SupportPage = () => {
               </div>
               
               <p className="text-slate-600 leading-relaxed">
-                Hi! I'm Anas, a developer passionate about building tools that solve real-world problems. JobTracker started as a way to manage my own job hunt and evolved into a full-stack ecosystem to help others land their dream roles.
+                Hi! I'm Anas, a developer passionate about building tools that solve real-world problems. JobTrackerr! started as a way to manage my own job hunt and evolved into a full-stack ecosystem to help others land their dream roles.
               </p>
 
               <div className="flex flex-wrap gap-4 pt-4">

@@ -1,8 +1,11 @@
+import * as Google from 'expo-auth-session/providers/google';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as WebBrowser from 'expo-web-browser';
 import { Briefcase, Eye, EyeOff, Lock, Mail, UserCircle2 } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import {
     ActivityIndicator,
+    Alert,
     Dimensions,
     Image,
     KeyboardAvoidingView,
@@ -22,13 +25,15 @@ import Animated, {
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
+WebBrowser.maybeCompleteAuthSession();
+
 const { width } = Dimensions.get('window');
 
 const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const { login, loading, error } = useAuth();
+    const { login, googleLogin, loading, error } = useAuth();
     const { theme, isDarkMode } = useTheme();
 
     // Animation values
@@ -47,18 +52,54 @@ const LoginScreen = ({ navigation }) => {
     }));
 
     const handleLogin = async () => {
+        if (!email || !password) {
+            Alert.alert("Error", "Please enter both email and password");
+            return;
+        }
         try {
             await login(email, password);
         } catch (err) { }
     };
 
+    // Google Auth Request (using web client for all platforms)
+    const [request, response, promptAsync] = Google.useAuthRequest({
+        webClientId: '941596906956-pagh314kfu8qi2r3c7hdvdmm26kqkikp.apps.googleusercontent.com',
+        scopes: ["profile", "email"],
+    });
+
+    useEffect(() => {
+        if (response?.type === 'success') {
+            const { authentication } = response;
+            if (authentication?.accessToken) {
+                handleGoogleBackendLogin(authentication.accessToken);
+            }
+        }
+    }, [response]);
+
+    const handleGoogleBackendLogin = async (token) => {
+        try {
+            await googleLogin(token);
+        } catch (err) {
+            console.error("Google backend login error", err);
+            Alert.alert("Login Failed", "Failed to connect with Google account.");
+        }
+    };
+
     const handleGoogleLogin = async () => {
         try {
-            // This is where the Google Auth Session (expo-auth-session) would trigger
             console.log("Triggering Google Login flow...");
-            // For now, it shows the ready state. 
-            // await googleLogin(tokenFromGoogle);
-        } catch (err) { }
+            // Use the Expo proxy redirect URI directly
+            const redirectUri = 'https://auth.expo.io/@kaysarulanas/job-tracker';
+            console.log("Redirect URI:", redirectUri);
+            const result = await promptAsync({
+                useProxy: true,
+                redirectUri,
+            });
+            console.log("Prompt result type:", result?.type);
+        } catch (err) {
+            console.error("Google prompt error", err);
+            Alert.alert("Error", "Could not open Google Login.");
+        }
     };
 
     return (
@@ -73,7 +114,7 @@ const LoginScreen = ({ navigation }) => {
                     <View style={[styles.logoCircleSmall, { backgroundColor: isDarkMode ? '#4F46E520' : '#2563EB10' }]}>
                         <Briefcase color={theme.primary} size={32} />
                     </View>
-                    <Text style={[styles.title, { color: theme.text }]}>JobTracker</Text>
+                    <Text style={[styles.title, { color: theme.text }]}>JobTrackerr!</Text>
                     <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Welcome back, login to your account</Text>
                 </Animated.View>
 
@@ -152,7 +193,7 @@ const LoginScreen = ({ navigation }) => {
                         <TouchableOpacity
                             style={[styles.socialButton, { backgroundColor: theme.card, borderColor: theme.border }]}
                             onPress={handleGoogleLogin}
-                            disabled={loading}
+                            disabled={loading || !request}
                         >
                             <Image
                                 source={{ uri: 'https://cdn-icons-png.flaticon.com/512/2991/2991148.png' }}

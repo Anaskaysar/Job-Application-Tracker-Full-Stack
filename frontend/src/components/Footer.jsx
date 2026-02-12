@@ -80,7 +80,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-          <p>&copy; 2026 Job Tracker. All rights reserved.</p>
+            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} JobTrackerr!. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="https://linkedin.com/in/kaysarulanas" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">LinkedIn</a>
             <a href="https://github.com/Anaskaysar" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors duration-200">GitHub</a>

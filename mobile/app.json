@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "JobTracker",
+    "name": "JobTrackerr!",
     "slug": "job-tracker",
-    "version": "1.0.0",
+    "scheme": "jobtracker",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -13,11 +14,12 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jobtracker.app"
     },
     "android": {
-      "package": "com.anaskaysar.jobtracker",
-      "versionCode": 1,
+      "package": "com.jobtracker.app",
+      "versionCode": 2,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#2563EB"
@@ -27,6 +29,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "938b6e7a-91ab-474d-846f-109dd92aa0f9"
+      }
+    },
+    "plugins": [
+      "expo-web-browser"
+    ]
   }
 }

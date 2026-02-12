@@ -1,0 +1,19 @@
+VERSION 1.0.1 RELEASE NOTES
+===========================
+
+Initial closed testing release.
+
+WHAT'S NEW:
+------------
+• User authentication (Email & Google Sign-In)
+• Dashboard overview
+• Basic UI improvements
+
+TESTING FOCUS:
+---------------
+• Login/logout functionality
+• Google Sign-In flow
+• Dashboard navigation
+• Any crashes or bugs
+
+Please report issues found during testing.

@@ -44,9 +44,7 @@ const LandingHero = ({ onSignIn, onTryDemo }) => {
               <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
               <div className="w-3 h-3 rounded-full bg-green-400"></div>
             </div>
-            <div className="text-white text-sm font-medium">
-              Job Tracker Dashboard
-            </div>
+            <span className="text-white text-sm font-medium">JobTrackerr! Dashboard</span>
           </div>
           <div className="p-8 bg-gray-50">
             <div className="grid grid-cols-4 gap-4 mb-6">
