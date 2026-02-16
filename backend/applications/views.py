@@ -35,7 +35,7 @@ class ApplicationFileViewSet(viewsets.ModelViewSet):
 
 class GoogleLogin(SocialLoginView):
     adapter_class = GoogleOAuth2Adapter
-    callback_url = os.getenv("GOOGLE_CALLBACK_URL", "http://localhost:5173")
+    callback_url = os.getenv("GOOGLE_CALLBACK_URL", "https://api.jobtrackerr.com/accounts/google/login/callback/")
     client_class = OAuth2Client
 
 class ReviewViewSet(viewsets.ModelViewSet):
