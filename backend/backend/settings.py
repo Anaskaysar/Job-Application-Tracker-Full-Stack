@@ -173,6 +173,8 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+# Ensure CORS preflight requests are handled properly
+CORS_PREFLIGHT_MAX_AGE = 86400
 
 # CSRF configuration
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://jobtrackerr.com,https://www.jobtrackerr.com,https://api.jobtrackerr.com').split(',')

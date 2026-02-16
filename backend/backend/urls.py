@@ -24,4 +24,7 @@ urlpatterns = [
     path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path('api/auth/google/', GoogleLogin.as_view(), name='google_login'),
     path('api/auth/delete/', DeleteAccountView.as_view(), name='delete_account'),
+    
+    # Allauth URLs for Google OAuth callbacks
+    path('accounts/', include('allauth.urls')),
 ]
