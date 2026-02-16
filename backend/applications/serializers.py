@@ -17,6 +17,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
         read_only_fields = ['user']
 
 from dj_rest_auth.registration.serializers import RegisterSerializer
+from dj_rest_auth.serializers import UserDetailsSerializer
+from allauth.account.models import EmailAddress
 from django.db import transaction
 
 class CustomRegisterSerializer(RegisterSerializer):
@@ -28,6 +30,16 @@ class CustomRegisterSerializer(RegisterSerializer):
         user.first_name = self.validated_data.get('name', '')
         user.save()
         return user
+
+class CustomUserDetailsSerializer(UserDetailsSerializer):
+    email_verified = serializers.SerializerMethodField()
+
+    class Meta(UserDetailsSerializer.Meta):
+        fields = UserDetailsSerializer.Meta.fields + ('email_verified',)
+
+    def get_email_verified(self, obj):
+        # Check if the user has any verified email address
+        return EmailAddress.objects.filter(user=obj, verified=True).exists()
 
 class ReviewSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username', read_only=True)

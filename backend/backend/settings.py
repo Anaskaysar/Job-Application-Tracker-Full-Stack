@@ -210,13 +210,16 @@ DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@jobtrackerr.com')
 # Custom Social Account Adapter for Auto-Username Generation
 SOCIALACCOUNT_ADAPTER = 'applications.adapters.CustomSocialAccountAdapter'
 
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 # Custom Registration Serializer to handle 'name' field
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'applications.serializers.CustomUserDetailsSerializer',
+}
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'applications.serializers.CustomRegisterSerializer',
 }

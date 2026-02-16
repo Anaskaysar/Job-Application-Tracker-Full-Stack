@@ -68,3 +68,5 @@ To update the live API, connect via SSH and pull changes:
 ---
 *Note: This project is part of a 3-week resume project challenge.*
 
+## Open backend server for deployment
+ssh -i "jobtracker-key.pem" ubuntu@api.jobtrackerr.com
