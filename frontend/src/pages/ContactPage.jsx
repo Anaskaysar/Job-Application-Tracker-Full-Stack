@@ -23,8 +23,8 @@ const ContactPage = () => {
             </div>
             <h3 className="text-lg font-bold text-slate-900 mb-2">Email Support</h3>
             <p className="text-slate-500 mb-4">For general inquiries and support</p>
-            <a href="mailto:support@jobtracker.kaysarulanas.me" className="text-blue-600 font-semibold hover:underline">
-              support@jobtracker.kaysarulanas.me
+            <a href="mailto:support@jobtrackerr.com" className="text-blue-600 font-semibold hover:underline">
+              support@jobtrackerr.com
             </a>
           </div>
 

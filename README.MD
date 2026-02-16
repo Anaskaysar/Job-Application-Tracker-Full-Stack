@@ -3,8 +3,8 @@
 A professional job application tracking system designed to help users organize their job search. This project features a secure Django REST backend and a modern React frontend with a companion mobile app.
 
 ## 🔗 Live Production Links
-- **Web App**: [https://jobtracker.kaysarulanas.me](https://jobtracker.kaysarulanas.me) (Vercel)
-- **API (Admin)**: [https://api.jobtracker.kaysarulanas.me/admin/](https://api.jobtracker.kaysarulanas.me/admin/) (AWS EC2)
+- **Web App**: [https://jobtrackerr.com](https://jobtrackerr.com) (Vercel)
+- **API (Admin)**: [https://api.jobtrackerr.com/admin/](https://api.jobtrackerr.com/admin/) (AWS EC2)
 - **Full Project Report**: [Detailed System Architecture & Features](docs/project_report.md)
 
 ## 🚀 Features
@@ -58,24 +58,9 @@ The frontend is auto-deployed via GitHub or manually via:
 ```bash
 cd frontend
 npx vercel --prod
-```
 
 #### Backend (AWS EC2)
 To update the live API, connect via SSH and pull changes:
-```bash
-ssh -i "jobtracker-key.pem" ubuntu@api.jobtracker.kaysarulanas.me
-
-# Once on the server:
-cd ~/Job-Application-Tracker-Full-Stack
-git pull origin main
-sudo systemctl restart gunicorn
-```
-
-## 🗂️ API Endpoints
-| Method | Endpoint | Description |
-|------|---------|------------|
-| POST | `/api/auth/login/` | User Login |
-| POST | `/api/auth/registration/` | New User Registration |
 | POST | `/api/auth/google/` | Google OAuth Authentication |
 | GET | `/api/applications/` | List user applications |
 | POST | `/api/applications/` | Create application |

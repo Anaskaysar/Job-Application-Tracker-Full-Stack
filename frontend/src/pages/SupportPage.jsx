@@ -60,7 +60,7 @@ const SupportPage = () => {
                 <a href="https://linkedin.com/in/kaysarulanas" target="_blank" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
                   <Linkedin size={20} className="text-slate-600 group-hover:text-blue-600" />
                 </a>
-                <a href="https://jobtracker.kaysarulanas.me" target="_blank" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
+                <a href="https://jobtrackerr.com" target="_blank" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
                   <Globe size={20} className="text-slate-600 group-hover:text-blue-600" />
                 </a>
                 <a href="mailto:anas@example.com" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
@@ -116,6 +116,28 @@ const SupportPage = () => {
                 <div className="text-purple-600 font-black text-3xl">📱</div>
                 <h4 className="font-bold text-slate-800">App Store</h4>
                 <p className="text-sm text-slate-500">Deploying the iOS and Android versions to global stores.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* New Support Contact Section */}
+          <div className="bg-white shadow-sm border border-slate-200 rounded-3xl p-8 md:p-12 text-center space-y-6">
+            <h3 className="text-2xl font-bold text-slate-900">Need Help?</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
+              Find answers to common questions and get the help you need.
+            </p>
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-3 text-gray-700 dark:text-gray-300">
+                <Mail className="w-5 h-5 text-indigo-600" />
+                <span>support@jobtrackerr.com</span>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-3 text-gray-700 dark:text-gray-300">
+                <Globe className="w-5 h-5 text-indigo-600" />
+                <a href="https://jobtrackerr.com/help" className="hover:underline">
+                  Help Center
+                </a>
               </div>
             </div>
           </div>

@@ -154,7 +154,7 @@ const ProfileContent = ({ onClose }) => {
                     <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>Legal</Text>
                     <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
                         <TouchableOpacity
-                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me/privacy')}
+                            onPress={() => Linking.openURL('https://jobtrackerr.com/privacy')}
                             style={styles.infoRow}
                         >
                             <FileText color={theme.textSecondary} size={20} />
@@ -167,7 +167,7 @@ const ProfileContent = ({ onClose }) => {
                         <View style={[styles.divider, { backgroundColor: theme.border }]} />
 
                         <TouchableOpacity
-                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me/terms')}
+                            onPress={() => Linking.openURL('https://jobtrackerr.com/terms')}
                             style={styles.infoRow}
                         >
                             <FileText color={theme.textSecondary} size={20} />
@@ -197,7 +197,7 @@ const ProfileContent = ({ onClose }) => {
                         </View>
 
                         <TouchableOpacity
-                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me')}
+                            onPress={() => Linking.openURL('https://jobtrackerr.com')}
                             style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16, paddingLeft: 52 }}
                         >
                             <Text style={{ color: theme.primary, fontWeight: 'bold', marginRight: 6 }}>Visit Website</Text>
@@ -234,7 +234,7 @@ const ProfileContent = ({ onClose }) => {
                         <View style={[styles.divider, { backgroundColor: theme.border }]} />
 
                         <TouchableOpacity
-                            onPress={() => Linking.openURL('https://jobtracker.kaysarulanas.me/contact')}
+                            onPress={() => Linking.openURL('https://jobtrackerr.com/contact')}
                             style={styles.infoRow}
                         >
                             <HelpCircle color={theme.textSecondary} size={20} />

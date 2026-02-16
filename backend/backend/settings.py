@@ -151,12 +151,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS configuration
-CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,https://jobtrackerr.com,https://www.jobtrackerr.com').split(',')
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # Allow all in debug mode only
 CORS_ALLOW_CREDENTIALS = True
 
 # CSRF configuration
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://jobtracker.kaysarulanas.me,https://api.jobtracker.kaysarulanas.me').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', 'https://jobtrackerr.com,https://www.jobtrackerr.com,https://api.jobtrackerr.com').split(',')
 
 # Production Security
 if not DEBUG:

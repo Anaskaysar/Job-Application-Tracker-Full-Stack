@@ -106,10 +106,10 @@ const PrivacyPolicy = () => {
                 If you have any questions about this Privacy Policy, please contact
                 us at{" "}
                 <a
-                  href="mailto:support@jobtracker.kaysarulanas.me"
+                  href="mailto:support@jobtrackerr.com"
                   className="text-blue-600 hover:underline"
                 >
-                  support@jobtracker.kaysarulanas.me
+                  support@jobtrackerr.com
                 </a>
                 .
               </p>
