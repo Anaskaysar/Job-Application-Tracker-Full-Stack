@@ -1,10 +1,29 @@
 import { useGoogleLogin } from "@react-oauth/google";
-import { AlertCircle, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { AlertCircle, Check, Eye, EyeOff, Lock, Mail, User, X } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayout from "../components/AuthLayout";
 import Loader from "../components/Loader";
 import { useAuth } from "../context/AuthContext";
+
+const PasswordStrength = ({ password }) => {
+  const isValid = password.length >= 9;
+  
+  if (!password) return null;
+
+  return (
+    <div className="flex items-center gap-2 mt-2 text-xs transition-all duration-300 ease-in-out">
+      {isValid ? (
+        <Check size={14} className="text-green-500" />
+      ) : (
+        <X size={14} className="text-red-500" />
+      )}
+      <span className={`${isValid ? "text-green-600" : "text-gray-500"} font-medium`}>
+        At least 9 characters long
+      </span>
+    </div>
+  );
+};
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -151,6 +170,7 @@ const SignupPage = () => {
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
+            <PasswordStrength password={password} />
           </div>
           <div className="space-y-1">
             <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
