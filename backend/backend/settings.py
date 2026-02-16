@@ -217,9 +217,9 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 # Custom Registration Serializer to handle 'name' field
-REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'applications.serializers.CustomUserDetailsSerializer',
-}
+# REST_AUTH_SERIALIZERS = {
+#     'USER_DETAILS_SERIALIZER': 'applications.serializers.CustomUserDetailsSerializer',
+# }
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'applications.serializers.CustomRegisterSerializer',
 }
