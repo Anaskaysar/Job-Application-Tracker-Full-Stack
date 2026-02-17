@@ -44,7 +44,7 @@ const NotFoundPage = () => {
             Back to Home
           </Link>
           <a
-            href="mailto:kaysarulanas2@gmail.com"
+            href="mailto:info@jobtrackerr.com"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 font-semibold text-lg transition-colors"
           >
             Contact Support

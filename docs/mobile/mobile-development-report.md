@@ -2,8 +2,8 @@
 
 **Developer:** Kaysarul Anas  
 **Technology Stack:** React Native (Expo) + Reanimated + Lucide  
-**Report Date:** February 9, 2026  
-**Project Status:** 🟢 UI/UX & Core Navigation Complete  
+**Report Date:** February 16, 2026  
+**Project Status:** 🟡 Coming Soon (Final Polish Phase)  
 
 ---
 
@@ -113,6 +113,7 @@ graph TD
 - ✅ **Guest Mode**: Exploration without account creation.
 - ✅ **Dashboard UI**: Overview stats and job application cards.
 - ✅ **Smart Redirection**: Auto-detects login state during the welcome animation.
+- ✅ **Web Landing Teaser**: Integrated "Coming Soon" banner on the main website with an interactive 3D Android phone slideshow.
 
 ---
 

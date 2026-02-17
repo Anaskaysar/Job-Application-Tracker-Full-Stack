@@ -13,7 +13,9 @@ const EmailVerificationBanner = ({ user }) => {
   const handleResendVerification = async () => {
     try {
       setSending(true);
-      await api.post("/api/auth/registration/resend-email/");
+      await api.post("/api/auth/registration/resend-email/", {
+        email: user?.email
+      });
       setSent(true);
       setTimeout(() => setSent(false), 5000);
     } catch (error) {

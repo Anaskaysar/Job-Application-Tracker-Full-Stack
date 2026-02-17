@@ -35,7 +35,7 @@ const SecurityPage = () => {
             <section className="mb-8">
               <h2 className="text-xl font-bold text-slate-800 mb-4">4. Vulnerability Disclosure</h2>
               <p className="text-slate-600">
-                If you discover a security vulnerability in our platform, please report it to us immediately at kaysarulanas2@gmail.com. We appreciate your help in keeping our community safe.
+                If you discover a security vulnerability in our platform, please report it to us immediately at info@jobtrackerr.com. We appreciate your help in keeping our community safe.
               </p>
             </section>
           </div>

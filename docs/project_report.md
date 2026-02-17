@@ -495,7 +495,9 @@ I extended the platform to mobile devices using **React Native** and **Expo**, s
 
 ### 6.2 Key Features
 
-#### 📱 Native Experience
+#### 📱 Native Experience (Coming Soon)
+- **Status**: Currently in final development phase.
+- **Teaser Banner**: Interactive landing page banner with Android slideshow.
 - **Navigation**: Stack and Tab navigation using `expo-router`
 - **Gestures**: Smooth transitions and touch interactions
 - **Safe Area**: Optimized for iPhone Dynamic Island and notches

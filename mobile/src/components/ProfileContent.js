@@ -140,7 +140,7 @@ const ProfileContent = ({ onClose }) => {
                             <View style={styles.donationContent}>
                                 <Heart color="#fff" size={24} />
                                 <View style={{ flex: 1, marginLeft: 16 }}>
-                                    <Text style={styles.donationTitle}>Support JobTrackerr!</Text>
+                                    <Text style={styles.donationTitle}>Support JobTrackerr</Text>
                                     <Text style={styles.donationSubtitle}>Help keep this passion project alive and growing.</Text>
                                 </View>
                                 <ExternalLink color="#fff" size={20} />
@@ -181,7 +181,7 @@ const ProfileContent = ({ onClose }) => {
 
                 {/* About Section */}
                 <View style={styles.section}>
-                    <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>About JobTrackerr!</Text>
+                    <Text style={[styles.sectionTitle, { color: theme.textSecondary }]}>About JobTrackerr</Text>
                     <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
 
                         <View style={{ flexDirection: 'row', marginBottom: 16 }}>
@@ -209,7 +209,7 @@ const ProfileContent = ({ onClose }) => {
                         <View style={styles.infoRow}>
                             <Info color={theme.textSecondary} size={20} />
                             <View style={styles.infoTextContainer}>
-                                <Text style={[styles.infoValue, { color: theme.text }]}>Version 1.0.0 (Stable)</Text>
+                                <Text style={[styles.infoValue, { color: theme.text }]}>Version 1.2.0 (Stable)</Text>
                                 <Text style={[styles.infoLabel, { color: theme.textSecondary }]}>Built with ❤️ by Kaysarul Anas</Text>
                             </View>
                         </View>

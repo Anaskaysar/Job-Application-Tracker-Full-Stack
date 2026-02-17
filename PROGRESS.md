@@ -17,3 +17,7 @@ This file tracks the status of the three projects planned for the next three wee
 
 ---
 *Created on 2026-02-04*
+
+## 🛠 Technical Debt / Next Steps
+- [ ] **Dependency Deduplication**: `expo doctor` detected duplicate `expo-constants` versions.
+  - *Action*: Run `rm -rf node_modules package-lock.json && npm install` in the `mobile` directory.

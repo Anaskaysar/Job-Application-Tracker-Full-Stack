@@ -3,13 +3,13 @@ GOOGLE PLAY STORE LISTING CONTENT
 
 APP DETAILS:
 -----------
-App Name: JobTrackerr!
+App Name: JobTrackerr
 
 Short Description (80 chars max):
 A visual job search tracker to manage applications, monitor progress, and stay organized.
 
 Full Description:
-JobTrackerr! helps you manage your job search journey efficiently. 
+JobTrackerr helps you manage your job search journey efficiently. 
 
 Features:
 • Track multiple job applications in one place
@@ -82,14 +82,11 @@ Data Security:
 
 RELEASE NOTES:
 -------------
-Version 1.0.0:
-• Initial release
-• Track job applications and interviews
-• Set reminders and follow-ups
-• Export data functionality
-• Clean, modern interface
-• Google authentication support
-• Cross-device sync
+Version 1.2.0:
+• Rebranded to JobTrackerr for a cleaner experience.
+• Updated package identity for Play Store compatibility.
+• Enhanced authentication and real-time data sync.
+• UI refinements and performance optimizations.
 
 KEYWORDS FOR SEARCH:
 ------------------

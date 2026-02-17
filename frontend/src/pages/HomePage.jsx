@@ -4,6 +4,7 @@ import CTA from "../components/CTA";
 import Features from "../components/Features";
 import Footer from "../components/Footer";
 import LandingHero from "../components/LandingHero";
+import MobileAppBanner from "../components/MobileAppBanner";
 import Navbar from "../components/Navbar";
 import Testimonials from "../components/Testimonials";
 
@@ -48,6 +49,10 @@ const HomePage = () => {
       <div id="testimonials">
         <Testimonials />
       </div>
+
+      {/* Mobile App Banner */}
+      <MobileAppBanner />
+
       <CTA onSignIn={handleSignIn} onTryDemo={handleTryDemo} />
       <Footer />
     </div>

@@ -89,7 +89,7 @@ const LoginScreen = ({ navigation }) => {
         try {
             console.log("Triggering Google Login flow...");
             // Use the Expo proxy redirect URI directly
-            const redirectUri = 'https://auth.expo.io/@kaysarulanas/job-tracker';
+            const redirectUri = 'https://auth.expo.io/@kaysarulanas/jobtrackerr';
             console.log("Redirect URI:", redirectUri);
             const result = await promptAsync({
                 useProxy: true,
@@ -114,7 +114,7 @@ const LoginScreen = ({ navigation }) => {
                     <View style={[styles.logoCircleSmall, { backgroundColor: isDarkMode ? '#4F46E520' : '#2563EB10' }]}>
                         <Briefcase color={theme.primary} size={32} />
                     </View>
-                    <Text style={[styles.title, { color: theme.text }]}>JobTrackerr!</Text>
+                    <Text style={[styles.title, { color: theme.text }]}>JobTrackerr</Text>
                     <Text style={[styles.subtitle, { color: theme.textSecondary }]}>Welcome back, login to your account</Text>
                 </Animated.View>
 
