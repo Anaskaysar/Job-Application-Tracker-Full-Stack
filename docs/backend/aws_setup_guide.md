@@ -55,7 +55,7 @@ server {
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
-        alias /home/ubuntu/Job-Application-Tracker-Full-Stack/backend/staticfiles/;
+        alias /home/ubuntu/JobTrackerr-FullStack-React-Django/backend/staticfiles/;
     }
 
     location / {

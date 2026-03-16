@@ -1,6 +1,6 @@
 # Documentation Files
 
-This directory contains comprehensive documentation for the Job Application Tracker project.
+This directory contains comprehensive documentation for the JobTrackerr-FullStack-React-Django project.
 
 ## 📄 Files
 

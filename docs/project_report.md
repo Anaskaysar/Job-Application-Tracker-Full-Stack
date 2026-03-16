@@ -1,4 +1,4 @@
-# Job Application Tracker - Project Report
+# JobTrackerr-FullStack-React-Django - Project Report
 
 **Developer:** Kaysarul Anas  
 **Technology Stack:** Django REST Framework + React (Vite)  
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-The Job Application Tracker is a comprehensive **Full-Stack Cross-Platform Solution** designed to help job seekers organize and manage their job applications efficiently. The system consists of a robust Django backend, a modern React web frontend, and a native mobile application built with React Native. It provides secure user authentication, real-time synchronization across devices, file management, and insightful analytics.
+The JobTrackerr-FullStack-React-Django is a comprehensive **Full-Stack Cross-Platform Solution** designed to help job seekers organize and manage their job applications efficiently. The system consists of a robust Django backend, a modern React web frontend, and a native mobile application built with React Native. It provides secure user authentication, real-time synchronization across devices, file management, and insightful analytics.
 
 ### Key Achievements
 
@@ -740,8 +740,8 @@ After=network.target
 [Service]
 User=ubuntu
 Group=www-data
-WorkingDirectory=/home/ubuntu/Job-Application-Tracker-Full-Stack/backend
-ExecStart=/home/ubuntu/Job-Application-Tracker-Full-Stack/backend/venv/bin/gunicorn \
+WorkingDirectory=/home/ubuntu/JobTrackerr-FullStack-React-Django/backend
+ExecStart=/home/ubuntu/JobTrackerr-FullStack-React-Django/backend/venv/bin/gunicorn \
           --access-logfile - \
           --workers 3 \
           --bind unix:/run/gunicorn.sock \

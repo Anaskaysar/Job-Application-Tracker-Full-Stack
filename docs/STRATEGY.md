@@ -41,7 +41,7 @@ Updating the production backend follows a simple Git-based flow:
     ```
 2.  **Server (SSH)**: Pull the latest code:
     ```bash
-    cd ~/Job-Application-Tracker-Full-Stack
+    cd ~/JobTrackerr-FullStack-React-Django
     git pull origin main
     ```
 3.  **Apply Changes**:

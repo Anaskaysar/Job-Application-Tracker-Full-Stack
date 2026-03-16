@@ -1,4 +1,4 @@
-# Full-Stack Job Application Tracker: Implementation & Logic Study Guide
+# Full-Stack JobTrackerr-FullStack-React-Django: Implementation & Logic Study Guide
 
 This guide is designed to help you understand the core logic and technical decisions made during the development of this project. It serves as both a reference for the codebase and a learning resource for full-stack engineering principles.
 

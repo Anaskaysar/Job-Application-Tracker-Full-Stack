@@ -1,4 +1,4 @@
-# Job Application Tracker (Full Stack)
+# JobTrackerr-FullStack-React-Django
 
 A professional job application tracking system designed to help users organize their job search. This project features a secure Django REST backend and a modern React frontend with a companion mobile app.
 
@@ -73,7 +73,7 @@ npx vercel --prod
 To update the live API, connect via SSH and pull changes:
 ```bash
 ssh -i "jobtracker-key.pem" ubuntu@api.jobtrackerr.com
-cd /home/ubuntu/Job-Application-Tracker-Full-Stack/backend
+cd /home/ubuntu/JobTrackerr-FullStack-React-Django/backend
 git pull origin main
 sudo systemctl restart gunicorn
 ```

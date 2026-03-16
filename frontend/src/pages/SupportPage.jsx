@@ -60,10 +60,10 @@ const SupportPage = () => {
                 <a href="https://linkedin.com/in/kaysarulanas" target="_blank" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
                   <Linkedin size={20} className="text-slate-600 group-hover:text-blue-600" />
                 </a>
-                <a href="https://jobtrackerr.com" target="_blank" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
+                <a href="https://kaysarulanas.me" target="_blank" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
                   <Globe size={20} className="text-slate-600 group-hover:text-blue-600" />
                 </a>
-                <a href="mailto:anas@example.com" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
+                <a href="mailto:kaysarulanas2@gmail.com" className="p-3 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors border border-slate-100 group">
                   <Mail size={20} className="text-slate-600 group-hover:text-red-500" />
                 </a>
               </div>

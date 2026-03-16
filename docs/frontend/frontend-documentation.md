@@ -1,6 +1,6 @@
-# Frontend Documentation: Job Application Tracker
+# Frontend Documentation: JobTrackerr-FullStack-React-Django
 
-This document provides a comprehensive guide to understanding, setting up, and developing the frontend for the Job Application Tracker.
+This document provides a comprehensive guide to understanding, setting up, and developing the frontend for the JobTrackerr-FullStack-React-Django.
 
 ## 🚀 Project Overview
 A modern, responsive React application built with Vite and styled using Tailwind CSS v4. It integrates with a Django REST Framework backend using JWT authentication.
